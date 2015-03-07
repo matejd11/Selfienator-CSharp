@@ -65,6 +65,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Events\EOpenWindow.cs" />
+    <Compile Include="Core\WindowFactory.cs" />
     <Compile Include="Models\Serial.cs" />
     <Compile Include="Core\ActionCommand.cs" />
     <Compile Include="Core\Convertors.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Core\ISubscriber.cs" />
     <Compile Include="Core\IWindowFactory.cs" />
     <Compile Include="Core\ViewModel.cs" />
+    <Compile Include="Core\Events\ECloseWindow.cs" />
     <Compile Include="ViewModels\LoadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\LoadWindow.xaml.cs">

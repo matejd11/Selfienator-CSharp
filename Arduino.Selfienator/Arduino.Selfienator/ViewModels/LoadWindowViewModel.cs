@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Views;
 using System;
 using System.IO.Ports;
 using System.Windows.Input;
@@ -39,6 +40,9 @@ namespace Arduino.Selfienator.ViewModels
             string portName = (string)obj;
 
             //TODO: Check if port is still opened, Open mainWindow, Open port
+
+            WindowFactory<MainWindow>.getInstance().CreateNewWindow();
+            EventAggregator.getInstance().PublishEvent<ECloseWindow>();
         }
 
         public string[] listOfPorts

@@ -15,7 +15,6 @@ namespace Arduino.Selfienator.Core
         private readonly object lockSubscriberDictionary = new object();
 
         #region IEventAggregator Members
-
         public void PublishEvent<TEventType>(TEventType eventToPublish)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventType));
@@ -68,9 +67,6 @@ namespace Arduino.Selfienator.Core
                 }
             }
         }
-
-
-
         #endregion
 
         private void InvokeSubscriberEvent<TEventType>(TEventType eventToPublish, ISubscriber<TEventType> subscriber)

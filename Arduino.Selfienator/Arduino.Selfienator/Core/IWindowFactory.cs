@@ -3,5 +3,7 @@
     public interface IWindowFactory
     {
         void CreateNewWindow();
+
+        void CreateNewDialogWindow();
     }
 }
