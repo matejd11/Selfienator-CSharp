@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EkonomyFinal.Windows
+namespace Arduino.Selfienator.Core
 {
     public interface IEventAggregator
     {

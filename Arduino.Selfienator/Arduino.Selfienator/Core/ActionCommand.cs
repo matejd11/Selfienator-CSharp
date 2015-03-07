@@ -1,14 +1,16 @@
-﻿namespace EkonomyFinal.Windows
+﻿using System;
+using System.Windows.Input;
+
+namespace Arduino.Selfienator.Core
 {
-    using System;
-    using System.Windows.Input;
 
     public class ActionCommand : ICommand
     {
         private readonly Action<Object> action;
         private readonly Predicate<Object> predicate;
 
-        public ActionCommand(Action<Object> action) : this(action, null)
+        public ActionCommand(Action<Object> action)
+            : this(action, null)
         {
         }
 

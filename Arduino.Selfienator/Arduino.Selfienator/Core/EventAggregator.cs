@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace EkonomyFinal.Windows
+namespace Arduino.Selfienator.Core
 {
     public class EventAggregator : IEventAggregator
     {

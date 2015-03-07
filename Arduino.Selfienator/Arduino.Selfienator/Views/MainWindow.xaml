@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <StackPanel>
-        <Button Content="Zapnúť" Command="{Binding zapComm}"/>
-        <Button Content="Vypnúť" Command="{Binding vypComm}"/>
+        <Button Margin="5" Content="Zapnúť" Command="{Binding zapComm}"/>
+        <Button Margin="5" Content="Vypnúť" Command="{Binding vypComm}"/>
     </StackPanel>        
 </Window>

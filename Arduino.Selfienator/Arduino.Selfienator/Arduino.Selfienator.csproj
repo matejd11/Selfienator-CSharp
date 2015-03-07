@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,14 +66,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Serial.cs" />
-    <Compile Include="System\ActionCommand.cs" />
-    <Compile Include="System\Convertors.cs" />
-    <Compile Include="System\EventAggregator.cs" />
-    <Compile Include="System\IEventAggregator.cs" />
-    <Compile Include="System\ISubscriber.cs" />
-    <Compile Include="System\IWindowFactory.cs" />
-    <Compile Include="System\ViewModel.cs" />
+    <Compile Include="Core\ActionCommand.cs" />
+    <Compile Include="Core\Convertors.cs" />
+    <Compile Include="Core\EventAggregator.cs" />
+    <Compile Include="Core\IEventAggregator.cs" />
+    <Compile Include="Core\ISubscriber.cs" />
+    <Compile Include="Core\IWindowFactory.cs" />
+    <Compile Include="Core\ViewModel.cs" />
+    <Compile Include="ViewModels\LoadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\LoadWindow.xaml.cs">
+      <DependentUpon>LoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

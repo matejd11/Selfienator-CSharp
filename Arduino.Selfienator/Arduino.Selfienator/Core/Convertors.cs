@@ -3,8 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-
-namespace EkonomyFinal.Windows
+namespace Arduino.Selfienator.Core
 {
     public class BoolToVisibilityConverter : IValueConverter
     {

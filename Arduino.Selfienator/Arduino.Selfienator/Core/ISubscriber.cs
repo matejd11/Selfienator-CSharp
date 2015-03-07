@@ -1,5 +1,4 @@
-﻿
-namespace EkonomyFinal.Windows
+﻿namespace Arduino.Selfienator.Core
 {
     public interface ISubscriber<TEventType>
     {

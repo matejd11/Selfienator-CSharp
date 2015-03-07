@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace EkonomyFinal.Windows
+namespace Arduino.Selfienator.Core
 {
-    
-
     public class ViewModel : /*IDataErrorInfo,*/ INotifyPropertyChanged
     {
         //public string Error
