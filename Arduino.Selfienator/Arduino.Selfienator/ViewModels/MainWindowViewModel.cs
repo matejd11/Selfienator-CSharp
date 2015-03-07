@@ -1,10 +1,5 @@
-﻿using Arduino.Selfienator.Models;
-using Arduino.Selfienator.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Models;
 using System.Windows.Input;
 
 namespace Arduino.Selfienator.ViewModels

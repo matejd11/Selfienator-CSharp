@@ -1,11 +1,6 @@
 ﻿using Arduino.Selfienator.Core;
 using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Arduino.Selfienator.ViewModels
@@ -43,7 +38,7 @@ namespace Arduino.Selfienator.ViewModels
         {
             string portName = (string)obj;
 
-
+            //TODO: Check if port is still opened, Open mainWindow, Open port
         }
 
         public string[] listOfPorts
