@@ -1,4 +1,5 @@
-﻿using Arduino.Selfienator.ViewModels;
+﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.ViewModels;
 using System.Windows;
 
 namespace Arduino.Selfienator.Views
@@ -6,12 +7,21 @@ namespace Arduino.Selfienator.Views
     /// <summary>
     /// Interaction logic for LoadWindow.xaml
     /// </summary>
-    public partial class LoadWindow : Window
+    public partial class LoadWindow : Window, ISubscriber<ECloseWindow>
     {
         public LoadWindow()
         {
             InitializeComponent();
-            this.DataContext = new LoadWindowViewModel();
+            EventAggregator.getInstance().SubsribeEvent(this);
+            this.DataContext = new LoadWindowViewModel(this.GetHashCode());
+        }
+
+        public void OnEventHandler(ECloseWindow e)
+        {
+            if (e.hashCode == this.GetHashCode())
+            {
+                this.Close();
+            }
         }
     }
 }

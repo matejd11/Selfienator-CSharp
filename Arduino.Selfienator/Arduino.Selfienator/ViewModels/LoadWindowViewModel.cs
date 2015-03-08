@@ -11,9 +11,16 @@ namespace Arduino.Selfienator.ViewModels
         private string[] _listOfPorts;
         private string _selectedPort;
         private bool _isEditAllowed;
+        private int _windowHashCode;
 
-        public LoadWindowViewModel()
+        public LoadWindowViewModel() : this(0)
         {
+        }
+
+        public LoadWindowViewModel(int hashCode)
+        {
+            // TODO: Complete member initialization
+            _windowHashCode = hashCode;
             listOfPorts = SerialPort.GetPortNames();
         }
 
@@ -41,8 +48,8 @@ namespace Arduino.Selfienator.ViewModels
 
             //TODO: Check if port is still opened, Open mainWindow, Open port
 
+            EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
             WindowFactory<MainWindow>.getInstance().CreateNewWindow();
-            EventAggregator.getInstance().PublishEvent<ECloseWindow>();
         }
 
         public string[] listOfPorts
@@ -51,19 +58,15 @@ namespace Arduino.Selfienator.ViewModels
             set
             {
                 _listOfPorts = value;
+                isEditAllowed = true;
                 if (value.Length == 0)
                 {
-                    _listOfPorts = new string[] {"nenájdené"};
+                    _listOfPorts = new string[] { "nenájdené" };
+                    isEditAllowed = false;
                 }
                 if (_listOfPorts.Length == 1)
                 {
                     selectedPort = _listOfPorts[0];
-                    isEditAllowed = false;
-                }
-                else
-                {
-
-                    isEditAllowed = true;
                 }
                 NotifyPropertyChanged();
             }

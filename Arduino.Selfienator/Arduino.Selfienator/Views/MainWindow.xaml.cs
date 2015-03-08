@@ -11,7 +11,7 @@ namespace Arduino.Selfienator
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            this.DataContext = new MainWindowViewModel(this.GetHashCode());
         }
     }
 }

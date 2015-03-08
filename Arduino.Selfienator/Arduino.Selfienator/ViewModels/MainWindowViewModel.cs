@@ -6,9 +6,16 @@ namespace Arduino.Selfienator.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
+        private int _windowHashCode;
+
         public MainWindowViewModel()
         {
 
+        }
+
+        public MainWindowViewModel(int hashCode)
+        {
+            _windowHashCode = hashCode;
         }
 
         public ICommand zapComm { get { return new ActionCommand(zapni); } } 
