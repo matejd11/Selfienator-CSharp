@@ -19,7 +19,6 @@ namespace Arduino.Selfienator.ViewModels
 
         public LoadWindowViewModel(int hashCode)
         {
-            // TODO: Complete member initialization
             _windowHashCode = hashCode;
             listOfPorts = SerialPort.GetPortNames();
         }

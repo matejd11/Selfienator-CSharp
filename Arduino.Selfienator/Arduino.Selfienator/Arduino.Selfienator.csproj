@@ -65,8 +65,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Direction.cs" />
     <Compile Include="Core\Events\EOpenWindow.cs" />
+    <Compile Include="Core\ICommands.cs" />
     <Compile Include="Core\WindowFactory.cs" />
+    <Compile Include="Models\Commands.cs" />
     <Compile Include="Models\Serial.cs" />
     <Compile Include="Core\ActionCommand.cs" />
     <Compile Include="Core\Convertors.cs" />

@@ -5,5 +5,14 @@
     <StackPanel>
         <Button Margin="5" Content="Zapnúť" Command="{Binding zapComm}"/>
         <Button Margin="5" Content="Vypnúť" Command="{Binding vypComm}"/>
-    </StackPanel>        
+        <StackPanel Width="150">
+            <TextBlock Margin="5" Text="Angle:"/>
+            <TextBox Margin="5" Text="{Binding angle}"/>
+            <TextBlock Margin="5" Text="Direction:"/>
+            <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding direction}"/>
+            <TextBlock Margin="5" Text="Delay:"/>
+            <TextBox Margin="5" Text="{Binding delay}"/>
+            <Button Margin="5" Content="Send" Command="{Binding sendComm}" />
+        </StackPanel>
+    </StackPanel>
 </Window>
