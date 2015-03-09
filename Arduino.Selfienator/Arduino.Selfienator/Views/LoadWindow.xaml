@@ -1,14 +1,28 @@
 ﻿<Window x:Class="Arduino.Selfienator.Views.LoadWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Core="clr-namespace:Arduino.Selfienator.Core"
-        Title="LoadWindow" Width="250" Height="150">
+        xmlns:core="clr-namespace:Arduino.Selfienator.Core"
+        Title="LoadWindow" Width="288" Height="170">
     <Window.Resources>
-        <Core:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <core:MultiValueConvertor x:Key="MultiValueConvertor" />
     </Window.Resources>
     <StackPanel VerticalAlignment="Center">
-        <ComboBox Margin="5" ItemsSource="{Binding listOfPorts}" SelectedItem="{Binding selectedPort}" IsEnabled="{Binding isEditAllowed}" />
-        <Button Margin="5" Content="Pripojiť" Command="{Binding connectComm}" CommandParameter="{Binding selectedPort}" />
-        <Button Margin="5" Content="Obnoviť" Command="{Binding refreshComm}"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock TextAlignment="Right"  Width="42" Margin="7" Text="Port:"/>
+            <ComboBox x:Name="a" Width="200" Margin="5" ItemsSource="{Binding listOfPorts}" SelectedItem="{Binding selectedPort}" IsEnabled="{Binding isEditAllowed}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock TextAlignment="Right" Width="42" Margin="7" Text="Bit rate:"/>
+            <ComboBox x:Name="b" Width="200" Margin="5" ItemsSource="{Binding listOfBitRates}" SelectedItem="{Binding selectedBitRate}" IsEnabled="{Binding isEditAllowed}" />
+        </StackPanel>
+        <Button Margin="61 5 10 5" Content="Pripojiť" Command="{Binding connectComm}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultiValueConvertor}">
+                    <Binding Path="SelectedItem" ElementName="a"/>
+                    <Binding Path="SelectedItem" ElementName="b"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+        <Button Margin="61 5 10 5" Content="Obnoviť" Command="{Binding refreshComm}"/>
     </StackPanel>
 </Window>

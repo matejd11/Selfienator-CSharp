@@ -10,12 +10,12 @@ namespace Arduino.Selfienator.Models
     {
         private static Serial _instance;
         private static ICommands _commands;
-        public static Serial GetInstance(string port)
+        public static Serial GetInstance(string port, int bitRate)
         {
 
             if (_instance == null || _commands == null)
             {
-                _instance = new Serial(port);
+                _instance = new Serial(port, bitRate);
                 _commands = new Commands();
             }
             return _instance;
@@ -25,7 +25,7 @@ namespace Arduino.Selfienator.Models
         {
             if (_instance == null || _commands == null)
             {
-                return GetInstance("COM3");
+                return GetInstance("COM3", 9600);
             }
             return _instance;
         }
@@ -36,15 +36,16 @@ namespace Arduino.Selfienator.Models
         }
 
         private SerialPort serial;
-        public Serial(string port)
+        public Serial(string port, int bitRate)
         {
-            serial = new SerialPort(port, 9600);
+            serial = new SerialPort(port, bitRate);
             serial.Open();
             Thread scanThread = new Thread(p =>
             {
                 while (true)
                 {
                     //TODO: create reading from COM port
+
                 }
             });
             scanThread.IsBackground = true;

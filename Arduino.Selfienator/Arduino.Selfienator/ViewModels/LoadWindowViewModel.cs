@@ -1,5 +1,6 @@
 ﻿using Arduino.Selfienator.Core;
 using Arduino.Selfienator.Core.Events;
+using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
 using System;
 using System.IO.Ports;
@@ -11,6 +12,8 @@ namespace Arduino.Selfienator.ViewModels
     {
         private string[] _listOfPorts;
         private string _selectedPort;
+        private int[] _listOfBitRates;
+        private int _selectetBitRate;
         private bool _isEditAllowed;
 
         public LoadWindowViewModel()
@@ -22,6 +25,8 @@ namespace Arduino.Selfienator.ViewModels
         {
             _windowHashCode = hashCode;
             listOfPorts = SerialPort.GetPortNames();
+            listOfBitRates = new[] { 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 76800, 11500, 230400, 250000 };
+            selectedBitRate = 9600;
         }
 
         public ICommand connectComm { get { return new ActionCommand(connect, canConnect); } }
@@ -35,7 +40,12 @@ namespace Arduino.Selfienator.ViewModels
 
         private bool canConnect(object obj)
         {
-            if (!String.IsNullOrWhiteSpace((string)obj) && (string)obj != "nenájdené")
+            var values = (object[])obj;
+            if (values[0] == null || values[1] == null)
+            {
+                return false;
+            }
+            if (!String.IsNullOrWhiteSpace((string)values[0]) && (string)values[0] != "nenájdené")
             {
                 return true;
             }
@@ -45,11 +55,16 @@ namespace Arduino.Selfienator.ViewModels
         private void connect(object obj)
         {
             string portName = (string)obj;
+            int bitRate = (int)obj;
 
             //TODO: Check if port is still opened, Open mainWindow, Open port
 
-            EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
-            WindowFactory<MainWindow>.getInstance().CreateNewWindow();
+            if (Serial.GetInstance(portName, bitRate) != null)
+            {
+                EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
+                WindowFactory<MainWindow>.getInstance().CreateNewWindow();
+            }
+
         }
 
         public string[] listOfPorts
@@ -81,6 +96,27 @@ namespace Arduino.Selfienator.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
+        public int[] listOfBitRates
+        {
+            get { return _listOfBitRates; }
+            set
+            {
+                _listOfBitRates = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int selectedBitRate
+        {
+            get { return _selectetBitRate; }
+            set
+            {
+                _selectetBitRate = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public bool isEditAllowed
         {
             get { return _isEditAllowed; }
