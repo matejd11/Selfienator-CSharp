@@ -54,8 +54,9 @@ namespace Arduino.Selfienator.ViewModels
 
         private void connect(object obj)
         {
-            string portName = (string)obj;
-            int bitRate = (int)obj;
+            var values = (object[])obj;
+            string portName = (string)values[0];
+            int bitRate = (int)values[1];
 
             //TODO: Check if port is still opened, Open mainWindow, Open port
 
