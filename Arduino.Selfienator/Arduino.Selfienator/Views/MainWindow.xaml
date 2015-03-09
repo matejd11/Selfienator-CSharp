@@ -14,5 +14,6 @@
             <TextBox Margin="5" Text="{Binding delay}"/>
             <Button Margin="5" Content="Send" Command="{Binding sendComm}" />
         </StackPanel>
+        <Button Content="Debug" Command="{Binding debugOnComm}"/>
     </StackPanel>
 </Window>

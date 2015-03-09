@@ -36,6 +36,8 @@ namespace Arduino.Selfienator.Core
         //    return null;
         //}
 
+        protected int _windowHashCode;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

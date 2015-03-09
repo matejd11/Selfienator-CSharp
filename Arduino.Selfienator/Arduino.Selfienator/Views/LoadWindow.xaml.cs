@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.ViewModels;
 using System.Windows;
 

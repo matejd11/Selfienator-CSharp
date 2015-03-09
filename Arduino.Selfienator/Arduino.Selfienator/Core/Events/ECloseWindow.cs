@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Arduino.Selfienator.ViewModels
+namespace Arduino.Selfienator.Core.Events
 {
     public class ECloseWindow
     {

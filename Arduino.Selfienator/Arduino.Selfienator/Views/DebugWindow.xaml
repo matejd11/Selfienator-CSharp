@@ -1,0 +1,27 @@
+﻿<Window x:Class="Arduino.Selfienator.Views.DebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DebugWindow" Height="600" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="Incomming:" Margin="20 10"/>
+        <RichTextBox Grid.Column="0" Margin="15 35 15 15" KeyDown="RichTextBox_KeyDown">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding incomingMessage}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <TextBlock Grid.Column="1" Text="Outgoing:" Margin="20 10"/>
+        <RichTextBox Grid.Column="1" Margin="15 35 15 15" KeyDown="RichTextBox_KeyDown">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding outgoingMessage}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>

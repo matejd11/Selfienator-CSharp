@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events.Debug;
 using System;
 using System.IO.Ports;
 using System.Threading;
@@ -24,7 +25,7 @@ namespace Arduino.Selfienator.Models
         {
             if (_instance == null || _commands == null)
             {
-                GetInstance("COM3");
+                return GetInstance("COM3");
             }
             return _instance;
         }
@@ -50,9 +51,10 @@ namespace Arduino.Selfienator.Models
             scanThread.Start();
         }
 
-        public void send(String message)
+        public void send(string message)
         {
             serial.Write(message);
+            EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = false, message = message });
         }
     }
 }

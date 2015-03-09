@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -66,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Direction.cs" />
+    <Compile Include="Core\Events\Debug\EDebugMessage.cs" />
     <Compile Include="Core\Events\EOpenWindow.cs" />
     <Compile Include="Core\ICommands.cs" />
     <Compile Include="Core\WindowFactory.cs" />
@@ -81,6 +86,10 @@
     <Compile Include="Core\Events\ECloseWindow.cs" />
     <Compile Include="ViewModels\LoadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\DebugViewModel.cs" />
+    <Compile Include="Views\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>

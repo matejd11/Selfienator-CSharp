@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.Views;
 using System;
 using System.IO.Ports;
@@ -11,9 +12,9 @@ namespace Arduino.Selfienator.ViewModels
         private string[] _listOfPorts;
         private string _selectedPort;
         private bool _isEditAllowed;
-        private int _windowHashCode;
 
-        public LoadWindowViewModel() : this(0)
+        public LoadWindowViewModel()
+            : this(0)
         {
         }
 

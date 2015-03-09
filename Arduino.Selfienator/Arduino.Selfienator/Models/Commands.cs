@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events.Debug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
