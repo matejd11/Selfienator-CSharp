@@ -12,6 +12,9 @@ namespace Arduino.Selfienator.ViewModels
         public double angleX { get; set; }
         public double widthX { get; set; }
         public double heightX { get; set; }
+        public double widthXView { get; set; }
+        public double heightXView { get; set; }
+        public double marginX { get; set; }
 
         public MainWindowViewModel()
             : this(0)
@@ -25,6 +28,9 @@ namespace Arduino.Selfienator.ViewModels
             directions = new int[] { 0, 1 };
             heightX = 100;
             widthX = 100;
+            widthXView = 150;
+            heightXView = 150;
+            marginX = (widthXView - heightX) / 2;
             angleX = 0;
 
         }
@@ -46,18 +52,30 @@ namespace Arduino.Selfienator.ViewModels
             angleX += 5;
             widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
             heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            widthXView = 150;
+            heightXView = 150;
+            marginX = (widthXView - heightX) / 2;
             NotifyPropertyChanged("angleX");
             NotifyPropertyChanged("widthX");
             NotifyPropertyChanged("heightX");
+            NotifyPropertyChanged("widthXView");
+            NotifyPropertyChanged("heightXView");
+            NotifyPropertyChanged("marginX");
         }
         private void left(object obj)
         {
             angleX -= 5;
             widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
             heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            widthXView = 150;
+            heightXView = 150;
+            marginX = (widthXView - heightX) / 2;
             NotifyPropertyChanged("angleX");
             NotifyPropertyChanged("widthX");
             NotifyPropertyChanged("heightX");
+            NotifyPropertyChanged("widthXView");
+            NotifyPropertyChanged("heightXView");
+            NotifyPropertyChanged("marginX");
         }
         public double ConvertToRadians(double angle)
         {
