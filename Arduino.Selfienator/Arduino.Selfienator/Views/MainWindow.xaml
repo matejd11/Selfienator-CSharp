@@ -21,8 +21,35 @@
                             <PathGeometry Figures="M328.508 173.212L211.214 4.948c-5.633-6.598-14.846-6.598-20.479 0L73.445 173.209     c-5.631 6.599-3.146 11.996 5.529 11.996h49.068c8.672 0 15.77 7.097 15.77 15.771l0.077 51.518v133.428l-0.021 0.292     c0.003 8.676 7.321 15.734 15.991 15.736l82.789-0.002c8.674 0 15.771-7.096 15.771-15.766l-0.279-185.207     c0-8.674 7.094-15.771 15.769-15.771h49.066C331.647 185.205 334.136 179.808 328.508 173.212z" FillRule="NonZero"/>
                         </Path.Data>
                     </Path>
+                    <Path Margin="{Binding marginXD}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#ffffff" Stretch="Fill" Height="{Binding heightXD}" Width="{Binding widthXD}">
+                        <Path.Data>
+                            <PathGeometry Figures="m 201.72455 198.94956 1.2749 0 0 2.59682 -2.60153 0 0 -2.60153 z" FillRule="evenodd"/>
+                        </Path.Data>
+                    </Path>
                 </Canvas>
             </Viewbox>
+
+            <!--<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                <Canvas Width="401.949" Height="401.949" Canvas.Left="0" Canvas.Top="0">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <Canvas.Resources>
+                    </Canvas.Resources>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#000000">
+                        <Path.Data>
+                            <PathGeometry Figures="M328.508 173.212L211.214 4.948c-5.633-6.598-14.846-6.598-20.479 0L73.445 173.209     c-5.631 6.599-3.146 11.996 5.529 11.996h49.068c8.672 0 15.77 7.097 15.77 15.771l0.077 51.518v133.428l-0.021 0.292     c0.003 8.676 7.321 15.734 15.991 15.736l82.789-0.002c8.674 0 15.771-7.096 15.771-15.766l-0.279-185.207     c0-8.674 7.094-15.771 15.769-15.771h49.066C331.647 185.205 334.136 179.808 328.508 173.212z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FFFFFFFF" StrokeThickness="1" Stroke="#FFFFFFFF" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                        <Path.Data>
+                            <PathGeometry Figures="m 201.72455 198.94956 1.2749 0 0 2.59682 -2.60153 0 0 -2.60153 z" FillRule="evenodd"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Viewbox>-->
+
+
             <StackPanel VerticalAlignment="Center">
                 <Button Command="{Binding leftComm}" Margin="5" Content="left"/>
                 <Button Command="{Binding rightComm}" Margin="5" Content="right"/>

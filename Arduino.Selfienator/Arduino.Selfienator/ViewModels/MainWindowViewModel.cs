@@ -32,6 +32,7 @@ namespace Arduino.Selfienator.ViewModels
             widthXView = 150;
             heightXView = 150;
             marginX = (widthXView - heightX) / 2;
+            marginX = widthXView / 2;
             angleX = 0;
 
             Thread a = new Thread(p =>
@@ -39,14 +40,16 @@ namespace Arduino.Selfienator.ViewModels
                 while (true)
                 {
                     angleX += 1;
-                    widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
-                    heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+                    double x = Math.Cos(ConvertToRadians(angleX) * 100); 
+                    widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
+                    heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); 
                     widthXView = 150;
                     heightXView = 150;
+                    marginX = widthXView / 2;
                     marginX = (widthXView - heightX) / 2;
                     NotifyPropertyChanged("angleX");
                     NotifyPropertyChanged("widthX");
-                    NotifyPropertyChanged("heightX");
+                    NotifyPropertyChanged("heightX");;
                     NotifyPropertyChanged("widthXView");
                     NotifyPropertyChanged("heightXView");
                     NotifyPropertyChanged("marginX");
@@ -72,8 +75,8 @@ namespace Arduino.Selfienator.ViewModels
         private void right(object obj)
         {
             angleX += 5;
-            widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
-            heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
+            heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); ;
             widthXView = 150;
             heightXView = 150;
             marginX = (widthXView - heightX) / 2;
@@ -87,8 +90,8 @@ namespace Arduino.Selfienator.ViewModels
         private void left(object obj)
         {
             angleX -= 5;
-            widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
-            heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
+            heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); 
             widthXView = 150;
             heightXView = 150;
             marginX = (widthXView - heightX) / 2;
