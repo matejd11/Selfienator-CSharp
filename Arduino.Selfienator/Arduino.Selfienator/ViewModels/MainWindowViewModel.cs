@@ -34,27 +34,6 @@ namespace Arduino.Selfienator.ViewModels
             TMoveXArrow = new Thread(MoveXArrow);
             TMoveXArrow.IsBackground = true;
             TMoveXArrow.Start();
-
-            Thread a = new Thread(p =>
-            {
-                while (true)
-                {
-                    _xArrow.angle += 1;
-                    Thread.Sleep(25);
-                }
-            });
-            a.IsBackground = true;
-            a.Start();
-            Thread b = new Thread(p =>
-            {
-                while (true)
-                {
-                    _yArrow.angle -= 1;
-                    Thread.Sleep(25);
-                }
-            });
-            b.IsBackground = true;
-            b.Start();
         }
         public int[] directions { get; set; }
 
