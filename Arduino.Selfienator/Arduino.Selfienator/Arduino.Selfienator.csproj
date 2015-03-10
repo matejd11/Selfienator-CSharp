@@ -85,6 +85,7 @@
     <Compile Include="Core\IWindowFactory.cs" />
     <Compile Include="Core\ViewModel.cs" />
     <Compile Include="Core\Events\ECloseWindow.cs" />
+    <Compile Include="Models\CommandPropertyHelper.cs" />
     <Compile Include="ViewModels\LoadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\DebugViewModel.cs" />

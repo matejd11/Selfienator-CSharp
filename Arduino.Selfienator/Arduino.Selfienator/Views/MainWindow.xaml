@@ -51,25 +51,25 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Width="150">
                 <TextBlock Margin="5" Text="Angle:"/>
-                <TextBox Margin="5" Text="{Binding angle}"/>
+                <TextBox Margin="5" Text="{Binding x.angle}"/>
                 <TextBlock Margin="5" Text="Direction:"/>
-                <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding direction}"/>
+                <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding x.direction}"/>
                 <TextBlock Margin="5" Text="Delay:"/>
-                <TextBox Margin="5" Text="{Binding delay}"/>
-                <Button Margin="5" Content="Send" Command="{Binding sendComm}" />
+                <TextBox Margin="5" Text="{Binding x.delay}"/>
+                <Button Margin="5" Content="Send" Command="{Binding sendComm}" CommandParameter="X" />
             </StackPanel>
             <StackPanel Width="150">
                 <TextBlock Margin="5" Text="Angle:"/>
-                <TextBox Margin="5" Text="{Binding angle}"/>
+                <TextBox Margin="5" Text="{Binding y.angle}"/>
                 <TextBlock Margin="5" Text="Direction:"/>
-                <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding direction}"/>
+                <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding y.direction}"/>
                 <TextBlock Margin="5" Text="Delay:"/>
-                <TextBox Margin="5" Text="{Binding delay}"/>
-                <Button Margin="5" Content="Send" Command="{Binding sendComm}" />
+                <TextBox Margin="5" Text="{Binding y.delay}"/>
+                <Button Margin="5" Content="Send" Command="{Binding sendComm}" CommandParameter="Y" />
             </StackPanel>
         </StackPanel>
-        <Button Margin="5" Content="Send both at onece"/>
-        <Button Margin="5" Content="Debug" Command="{Binding debugOnComm}"/>
+        <Button Margin="5" Content="Send both at onece" Command="{Binding sendComm}" CommandParameter="A"/>
+        <Button Margin="5" Content="Debug" Command="{Binding debugOnComm}" CommandParameter="Y"/>
 
     </StackPanel>
 </Window>

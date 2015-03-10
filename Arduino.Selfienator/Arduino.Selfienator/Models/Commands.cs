@@ -38,7 +38,7 @@ namespace Arduino.Selfienator.Models
             sb.AppendFormat("MY-{0}-{1}-{2}", angle, direction, delay);
 
             sb.Append(";");
-            return sb.ToString(); ;
+            return sb.ToString();
         }
 
         public string focus()

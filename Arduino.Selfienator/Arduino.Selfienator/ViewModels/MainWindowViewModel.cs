@@ -12,6 +12,9 @@ namespace Arduino.Selfienator.ViewModels
     {
         private ArrowHelper _xArrow;
         private ArrowHelper _yArrow;
+        private CommandPropertyHelper _x;
+        private CommandPropertyHelper _y;
+
         private Thread TMoveXArrow;
 
         public MainWindowViewModel()
@@ -22,8 +25,10 @@ namespace Arduino.Selfienator.ViewModels
 
         public MainWindowViewModel(int hashCode)
         {
+            x = new CommandPropertyHelper();
+            y = new CommandPropertyHelper();
             xArrow = new ArrowHelper();
-            yArrow = new ArrowHelper() { angle = 180};
+            yArrow = new ArrowHelper() { angle = 180 };
             _windowHashCode = hashCode;
             directions = new int[] { 0, 1 };
             TMoveXArrow = new Thread(MoveXArrow);
@@ -31,9 +36,6 @@ namespace Arduino.Selfienator.ViewModels
             TMoveXArrow.Start();
 
         }
-        public int angle { get; set; }
-        public int direction { get; set; }
-        public int delay { get; set; }
         public int[] directions { get; set; }
 
         public ArrowHelper xArrow
@@ -51,6 +53,24 @@ namespace Arduino.Selfienator.ViewModels
             set
             {
                 _yArrow = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public CommandPropertyHelper x
+        {
+            get { return _x; }
+            set
+            {
+                _x = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public CommandPropertyHelper y
+        {
+            get { return _y; }
+            set
+            {
+                _y = value;
                 NotifyPropertyChanged();
             }
         }
@@ -95,13 +115,45 @@ namespace Arduino.Selfienator.ViewModels
         private void send(object obj)
         {
             //DEBUG
-            var commands = new Commands();
 
-            angle %= 360;
+            if ((string)obj == "A")
+            {
+                var commands = new Commands();
+                var angles = new double[] { x.angle, y.angle };
+                var directions = new int[] { x.direction, y.direction };
+                var delays = new int[] { x.delay, y.delay };
+                var names = new char[] { 'X', 'Y' };
 
-            Serial.GetInstance().send(Serial.getCommands().motor(new double[] { angle, 360 - angle }, new int[] { direction, 1 - direction }, new int[] { delay, 10 - delay }, new char[] { 'A', 'B' }));
+                x.angle %= 360;
 
-            xArrow.startExecuting(angle, direction, delay);
+                Serial.GetInstance().send(Serial.getCommands().motor(angles, directions, delays, names));
+
+                xArrow.startExecuting(x.angle, x.direction, x.delay);
+
+                yArrow.startExecuting(y.angle, y.direction, y.delay);
+            }
+
+            if ((string)obj == "X")
+            {
+                var commands = new Commands();
+
+                x.angle %= 360;
+
+                Serial.GetInstance().send(Serial.getCommands().motorX(x.angle, x.direction, x.delay));
+
+                xArrow.startExecuting(x.angle, x.direction, x.delay);
+            }
+
+            if ((string)obj == "Y")
+            {
+                var commands = new Commands();
+
+                y.angle %= 360;
+
+                Serial.GetInstance().send(Serial.getCommands().motorY(y.angle, y.direction, y.delay));
+
+                yArrow.startExecuting(y.angle, y.direction, y.delay);
+            }
 
             //ENDDEBUG
         }
@@ -118,7 +170,8 @@ namespace Arduino.Selfienator.ViewModels
 
         private void MoveXArrow(object obj)
         {
-            while(true){
+            while (true)
+            {
                 xArrow.Update();
                 yArrow.Update();
                 Thread.Sleep(0);
