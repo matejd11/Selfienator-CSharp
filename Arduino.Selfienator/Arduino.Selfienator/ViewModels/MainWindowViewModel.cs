@@ -2,6 +2,7 @@
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,7 +10,8 @@ namespace Arduino.Selfienator.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-         private ArrowHelper _xArrow; 
+        private ArrowHelper _xArrow;
+        private Thread TMoveXArrow;
 
         public MainWindowViewModel()
             : this(0)
@@ -22,6 +24,10 @@ namespace Arduino.Selfienator.ViewModels
             _xArrow = new ArrowHelper();
             _windowHashCode = hashCode;
             directions = new int[] { 0, 1 };
+            TMoveXArrow = new Thread(MoveXArrow);
+            TMoveXArrow.IsBackground = true;
+            TMoveXArrow.Start();
+
         }
         public int angle { get; set; }
         public int direction { get; set; }
@@ -49,7 +55,7 @@ namespace Arduino.Selfienator.ViewModels
         private void right(object obj)
         {
             _xArrow.angle += 5;
-            
+
         }
         private void left(object obj)
         {
@@ -67,7 +73,15 @@ namespace Arduino.Selfienator.ViewModels
             //DEBUG
             var commands = new Commands();
 
+            angle %= 360;
+
             Serial.GetInstance().send(Serial.getCommands().motor(new double[] { angle, 360 - angle }, new int[] { direction, 1 - direction }, new int[] { delay, 10 - delay }, new char[] { 'A', 'B' }));
+
+
+            xArrow.goalAngle = angle;
+            xArrow.goalDelay = delay;
+            xArrow.goalDirection = direction;
+
             //ENDDEBUG
         }
 
@@ -79,6 +93,14 @@ namespace Arduino.Selfienator.ViewModels
         private void zapni(object obj)
         {
             Serial.GetInstance().send("1");
+        }
+
+        private void MoveXArrow(object obj)
+        {
+            while(true){
+                xArrow.Update();
+                Thread.Sleep(0);
+            }
         }
 
     }
