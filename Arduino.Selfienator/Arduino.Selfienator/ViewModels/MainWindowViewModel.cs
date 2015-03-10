@@ -1,6 +1,7 @@
 ﻿using Arduino.Selfienator.Core;
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -8,6 +9,9 @@ namespace Arduino.Selfienator.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
+        public double angleX { get; set; }
+        public double widthX { get; set; }
+        public double heightX { get; set; }
 
         public MainWindowViewModel()
             : this(0)
@@ -18,7 +22,11 @@ namespace Arduino.Selfienator.ViewModels
         public MainWindowViewModel(int hashCode)
         {
             _windowHashCode = hashCode;
-            directions = new int[] {0, 1};
+            directions = new int[] { 0, 1 };
+            heightX = 100;
+            widthX = 100;
+            angleX = 0;
+
         }
         public int angle { get; set; }
         public int direction { get; set; }
@@ -30,6 +38,31 @@ namespace Arduino.Selfienator.ViewModels
         public ICommand vypComm { get { return new ActionCommand(vypni); } }
         public ICommand sendComm { get { return new ActionCommand(send); } }
         public ICommand debugOnComm { get { return new ActionCommand(startDebug); } }
+        public ICommand leftComm { get { return new ActionCommand(left); } }
+        public ICommand rightComm { get { return new ActionCommand(right); } }
+
+        private void right(object obj)
+        {
+            angleX += 5;
+            widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            NotifyPropertyChanged("angleX");
+            NotifyPropertyChanged("widthX");
+            NotifyPropertyChanged("heightX");
+        }
+        private void left(object obj)
+        {
+            angleX -= 5;
+            widthX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            heightX = Math.Abs(Math.Sin(ConvertToRadians(angleX * 2)) * 50) + 100;
+            NotifyPropertyChanged("angleX");
+            NotifyPropertyChanged("widthX");
+            NotifyPropertyChanged("heightX");
+        }
+        public double ConvertToRadians(double angle)
+        {
+            return (Math.PI / 180) * angle;
+        }
 
         private void startDebug(object obj)
         {
@@ -41,7 +74,7 @@ namespace Arduino.Selfienator.ViewModels
             //DEBUG
             var commands = new Commands();
 
-            Serial.GetInstance().send(Serial.getCommands().motor(new double[] { angle, 360-angle }, new int[] { direction, 1-direction }, new int[]{ delay, 10-delay }, new char[] {'A', 'B'}));
+            Serial.GetInstance().send(Serial.getCommands().motor(new double[] { angle, 360 - angle }, new int[] { direction, 1 - direction }, new int[] { delay, 10 - delay }, new char[] { 'A', 'B' }));
             //ENDDEBUG
         }
 
