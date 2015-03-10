@@ -35,6 +35,29 @@ namespace Arduino.Selfienator.ViewModels
             TMoveXArrow.IsBackground = true;
             TMoveXArrow.Start();
 
+            Thread a = new Thread(p =>
+            {
+                while (true)
+                {
+                    angleX += 1;
+                    double x = Math.Cos(ConvertToRadians(angleX) * 100); 
+                    widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
+                    heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); 
+                    widthXView = 150;
+                    heightXView = 150;
+                    marginX = widthXView / 2;
+                    marginX = (widthXView - heightX) / 2;
+                    NotifyPropertyChanged("angleX");
+                    NotifyPropertyChanged("widthX");
+                    NotifyPropertyChanged("heightX");;
+                    NotifyPropertyChanged("widthXView");
+                    NotifyPropertyChanged("heightXView");
+                    NotifyPropertyChanged("marginX");
+                    Thread.Sleep(25);
+                }
+            });
+            a.IsBackground = true;
+            a.Start();
         }
         public int[] directions { get; set; }
 
@@ -82,7 +105,6 @@ namespace Arduino.Selfienator.ViewModels
         public ICommand leftComm { get { return new ActionCommand(left); } }
         public ICommand rightComm { get { return new ActionCommand(right); } }
 
-        //DEBUG
         private void right(object obj)
         {
             if ((string)obj == "X")
@@ -99,13 +121,12 @@ namespace Arduino.Selfienator.ViewModels
             if ((string)obj == "X")
             {
                 _xArrow.angle -= 5;
-            }
+        }
             else if ((string)obj == "Y")
-            {
+        {
                 _yArrow.angle -= 5;
             }
         }
-        //ENDDEBUG
 
         private void startDebug(object obj)
         {
@@ -146,7 +167,7 @@ namespace Arduino.Selfienator.ViewModels
 
             if ((string)obj == "Y")
             {
-                var commands = new Commands();
+            var commands = new Commands();
 
                 y.angle %= 360;
 
