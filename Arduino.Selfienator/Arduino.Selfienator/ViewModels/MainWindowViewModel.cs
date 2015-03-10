@@ -11,6 +11,7 @@ namespace Arduino.Selfienator.ViewModels
     public class MainWindowViewModel : ViewModel
     {
         private ArrowHelper _xArrow;
+        private ArrowHelper _yArrow;
         private Thread TMoveXArrow;
 
         public MainWindowViewModel()
@@ -21,7 +22,8 @@ namespace Arduino.Selfienator.ViewModels
 
         public MainWindowViewModel(int hashCode)
         {
-            _xArrow = new ArrowHelper();
+            xArrow = new ArrowHelper();
+            yArrow = new ArrowHelper() { angle = 180};
             _windowHashCode = hashCode;
             directions = new int[] { 0, 1 };
             TMoveXArrow = new Thread(MoveXArrow);
@@ -43,6 +45,15 @@ namespace Arduino.Selfienator.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        public ArrowHelper yArrow
+        {
+            get { return _yArrow; }
+            set
+            {
+                _yArrow = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public ICommand zapComm { get { return new ActionCommand(zapni); } }
         public ICommand vypComm { get { return new ActionCommand(vypni); } }
@@ -54,12 +65,25 @@ namespace Arduino.Selfienator.ViewModels
         //DEBUG
         private void right(object obj)
         {
-            _xArrow.angle += 5;
-
+            if ((string)obj == "X")
+            {
+                _xArrow.angle += 5;
+            }
+            else if ((string)obj == "Y")
+            {
+                _yArrow.angle += 5;
+            }
         }
         private void left(object obj)
         {
-            _xArrow.angle -= 5;
+            if ((string)obj == "X")
+            {
+                _xArrow.angle -= 5;
+            }
+            else if ((string)obj == "Y")
+            {
+                _yArrow.angle -= 5;
+            }
         }
         //ENDDEBUG
 
@@ -77,10 +101,7 @@ namespace Arduino.Selfienator.ViewModels
 
             Serial.GetInstance().send(Serial.getCommands().motor(new double[] { angle, 360 - angle }, new int[] { direction, 1 - direction }, new int[] { delay, 10 - delay }, new char[] { 'A', 'B' }));
 
-
-            xArrow.goalAngle = angle;
-            xArrow.goalDelay = delay;
-            xArrow.goalDirection = direction;
+            xArrow.startExecuting(angle, direction, delay);
 
             //ENDDEBUG
         }
@@ -99,6 +120,7 @@ namespace Arduino.Selfienator.ViewModels
         {
             while(true){
                 xArrow.Update();
+                yArrow.Update();
                 Thread.Sleep(0);
             }
         }

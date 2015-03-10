@@ -22,6 +22,8 @@ namespace Arduino.Selfienator.Models
         private TimeSpan _deltaTime;
         private double _goalDelay;
 
+        private bool _isExecuting;
+
         public ArrowHelper()
         {
             height = 100;
@@ -30,6 +32,7 @@ namespace Arduino.Selfienator.Models
             heightView = 150;
             margin = (widthView - height) / 2;
             angle = 0;
+            _isExecuting = false;
         }
 
         public double angle
@@ -38,6 +41,10 @@ namespace Arduino.Selfienator.Models
             set
             {
                 _angle = value;
+                if (_angle < 0)
+                {
+                    _angle = 360 + _angle;
+                }
                 _angle %= 360;
                 width = Math.Abs(Math.Cos(ConvertToRadians(_angle)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (_angle))) * 100);
                 height = Math.Abs(Math.Cos(ConvertToRadians(_angle)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (_angle))) * 100);
@@ -119,6 +126,18 @@ namespace Arduino.Selfienator.Models
                 NotifyPropertyChanged();
             }
         }
+
+        public void startExecuting(double angle, int direction, double delay)
+        {
+            this.goalAngle = angle;
+            this.goalDirection = direction;
+            this.goalDelay = delay;
+            _isExecuting = true;
+        }
+        public void stopExecuting()
+        {
+            _isExecuting = false;
+        }
         public double ConvertToRadians(double angle)
         {
             return (Math.PI / 180) * angle;
@@ -126,24 +145,32 @@ namespace Arduino.Selfienator.Models
 
         internal void Update()
         {
-            if (_goalAngle != _angle)
+            if (_isExecuting)
             {
-                if (_deltaTime.TotalMilliseconds > _goalDelay)
+                if (_goalAngle != _angle)
                 {
-                    if (_goalDirection == Direction.CLOCK_WISE)
+                    if (_deltaTime.TotalMilliseconds > _goalDelay)
                     {
-                        angle += 1;
-                    }
-                    else if (_goalDirection == Direction.COUNTER_CLOCK_WISE)
-                    {
-                        angle -= 1;
-                    }
+                        if (_goalDirection == Direction.CLOCK_WISE)
+                        {
+                            angle += 1;
+                        }
+                        else if (_goalDirection == Direction.COUNTER_CLOCK_WISE)
+                        {
+                            angle -= 1;
+                        }
 
-                    _deltaTime = new TimeSpan();
-                    _LastTime = DateTime.Now;
-                    double a = _deltaTime.TotalMilliseconds; 
+                        _deltaTime = new TimeSpan();
+                        _LastTime = DateTime.Now;
+                        double a = _deltaTime.TotalMilliseconds;
+                    }
+                    _deltaTime = (DateTime.Now - _LastTime);
                 }
-                _deltaTime = (DateTime.Now - _LastTime);
+                else if (_goalAngle == angle)
+                {
+                    _isExecuting = false;
+                }
+
             }
         }
     }
