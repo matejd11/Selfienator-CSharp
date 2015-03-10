@@ -6,10 +6,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"
-        Title="MainWindow" Height="533" Width="391">
+        Title="MainWindow" Height="473.15" Width="391">
     <StackPanel>
-        <Button Margin="5" Content="Zapnúť" Command="{Binding zapComm}"/>
-        <Button Margin="5" Content="Vypnúť" Command="{Binding vypComm}"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center">
                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="UniformToFill" Height="{Binding xArrow.heightView}" Width="{Binding xArrow.widthView}">

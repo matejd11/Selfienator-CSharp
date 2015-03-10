@@ -39,25 +39,22 @@ namespace Arduino.Selfienator.ViewModels
             {
                 while (true)
                 {
-                    angleX += 1;
-                    double x = Math.Cos(ConvertToRadians(angleX) * 100); 
-                    widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
-                    heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); 
-                    widthXView = 150;
-                    heightXView = 150;
-                    marginX = widthXView / 2;
-                    marginX = (widthXView - heightX) / 2;
-                    NotifyPropertyChanged("angleX");
-                    NotifyPropertyChanged("widthX");
-                    NotifyPropertyChanged("heightX");;
-                    NotifyPropertyChanged("widthXView");
-                    NotifyPropertyChanged("heightXView");
-                    NotifyPropertyChanged("marginX");
+                    _xArrow.angle += 1;
                     Thread.Sleep(25);
                 }
             });
             a.IsBackground = true;
             a.Start();
+            Thread b = new Thread(p =>
+            {
+                while (true)
+                {
+                    _yArrow.angle -= 1;
+                    Thread.Sleep(25);
+                }
+            });
+            b.IsBackground = true;
+            b.Start();
         }
         public int[] directions { get; set; }
 
@@ -98,8 +95,6 @@ namespace Arduino.Selfienator.ViewModels
             }
         }
 
-        public ICommand zapComm { get { return new ActionCommand(zapni); } }
-        public ICommand vypComm { get { return new ActionCommand(vypni); } }
         public ICommand sendComm { get { return new ActionCommand(send); } }
         public ICommand debugOnComm { get { return new ActionCommand(startDebug); } }
         public ICommand leftComm { get { return new ActionCommand(left); } }
@@ -121,9 +116,9 @@ namespace Arduino.Selfienator.ViewModels
             if ((string)obj == "X")
             {
                 _xArrow.angle -= 5;
-        }
+            }
             else if ((string)obj == "Y")
-        {
+            {
                 _yArrow.angle -= 5;
             }
         }
@@ -167,7 +162,7 @@ namespace Arduino.Selfienator.ViewModels
 
             if ((string)obj == "Y")
             {
-            var commands = new Commands();
+                var commands = new Commands();
 
                 y.angle %= 360;
 
@@ -177,16 +172,6 @@ namespace Arduino.Selfienator.ViewModels
             }
 
             //ENDDEBUG
-        }
-
-        private void vypni(object obj)
-        {
-            Serial.GetInstance().send("2");
-        }
-
-        private void zapni(object obj)
-        {
-            Serial.GetInstance().send("1");
         }
 
         private void MoveXArrow(object obj)
