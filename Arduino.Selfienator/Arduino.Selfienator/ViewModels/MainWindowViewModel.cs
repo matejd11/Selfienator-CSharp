@@ -9,12 +9,7 @@ namespace Arduino.Selfienator.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        public double angleX { get; set; }
-        public double widthX { get; set; }
-        public double heightX { get; set; }
-        public double widthXView { get; set; }
-        public double heightXView { get; set; }
-        public double marginX { get; set; }
+         private ArrowHelper _xArrow; 
 
         public MainWindowViewModel()
             : this(0)
@@ -24,21 +19,24 @@ namespace Arduino.Selfienator.ViewModels
 
         public MainWindowViewModel(int hashCode)
         {
+            _xArrow = new ArrowHelper();
             _windowHashCode = hashCode;
             directions = new int[] { 0, 1 };
-            heightX = 100;
-            widthX = 100;
-            widthXView = 150;
-            heightXView = 150;
-            marginX = (widthXView - heightX) / 2;
-            angleX = 0;
-
         }
         public int angle { get; set; }
         public int direction { get; set; }
         public int delay { get; set; }
         public int[] directions { get; set; }
 
+        public ArrowHelper xArrow
+        {
+            get { return _xArrow; }
+            set
+            {
+                _xArrow = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public ICommand zapComm { get { return new ActionCommand(zapni); } }
         public ICommand vypComm { get { return new ActionCommand(vypni); } }
@@ -47,40 +45,17 @@ namespace Arduino.Selfienator.ViewModels
         public ICommand leftComm { get { return new ActionCommand(left); } }
         public ICommand rightComm { get { return new ActionCommand(right); } }
 
+        //DEBUG
         private void right(object obj)
         {
-            angleX += 5;
-            widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
-            heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); 
-            widthXView = 150;
-            heightXView = 150;
-            marginX = (widthXView - heightX) / 2;
-            NotifyPropertyChanged("angleX");
-            NotifyPropertyChanged("widthX");
-            NotifyPropertyChanged("heightX");
-            NotifyPropertyChanged("widthXView");
-            NotifyPropertyChanged("heightXView");
-            NotifyPropertyChanged("marginX");
+            _xArrow.angle += 5;
+            
         }
         private void left(object obj)
         {
-            angleX -= 5;
-            widthX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100);
-            heightX = Math.Abs(Math.Cos(ConvertToRadians(angleX)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (angleX))) * 100); 
-            widthXView = 150;
-            heightXView = 150;
-            marginX = (widthXView - heightX) / 2;
-            NotifyPropertyChanged("angleX");
-            NotifyPropertyChanged("widthX");
-            NotifyPropertyChanged("heightX");
-            NotifyPropertyChanged("widthXView");
-            NotifyPropertyChanged("heightXView");
-            NotifyPropertyChanged("marginX");
+            _xArrow.angle -= 5;
         }
-        public double ConvertToRadians(double angle)
-        {
-            return (Math.PI / 180) * angle;
-        }
+        //ENDDEBUG
 
         private void startDebug(object obj)
         {

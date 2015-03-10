@@ -74,6 +74,7 @@
     <Compile Include="Core\Events\EOpenWindow.cs" />
     <Compile Include="Core\ICommands.cs" />
     <Compile Include="Core\WindowFactory.cs" />
+    <Compile Include="Models\ArrowHelper.cs" />
     <Compile Include="Models\Commands.cs" />
     <Compile Include="Models\Serial.cs" />
     <Compile Include="Core\ActionCommand.cs" />
