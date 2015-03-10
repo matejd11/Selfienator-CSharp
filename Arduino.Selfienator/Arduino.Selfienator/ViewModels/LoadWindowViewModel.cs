@@ -25,7 +25,7 @@ namespace Arduino.Selfienator.ViewModels
         {
             _windowHashCode = hashCode;
             listOfPorts = SerialPort.GetPortNames();
-            listOfBitRates = new[] { 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 76800, 11500, 230400, 250000 };
+            listOfBitRates = new[] { 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 76800, 11500, 230400, 250000, 500000, 1000000 };
             selectedBitRate = 9600;
         }
 
