@@ -38,8 +38,8 @@ namespace Arduino.Selfienator.Models
         private SerialPort serial;
         public Serial(string port, int bitRate)
         {
-            serial = new SerialPort(port, bitRate);
-            serial.Open();
+            //serial = new SerialPort(port, bitRate);
+            //serial.Open();
             Thread scanThread = new Thread(p =>
             {
                 while (true)
@@ -54,7 +54,7 @@ namespace Arduino.Selfienator.Models
 
         public void send(string message)
         {
-            serial.Write(message);
+            //serial.Write(message);
             EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = false, message = message });
         }
     }
