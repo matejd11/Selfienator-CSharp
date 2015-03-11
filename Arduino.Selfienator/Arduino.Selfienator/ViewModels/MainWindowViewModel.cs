@@ -22,7 +22,8 @@ namespace Arduino.Selfienator.ViewModels
         {
 
         }
-
+        private Thread a;
+        private Thread b;
         public MainWindowViewModel(int hashCode)
         {
             x = new CommandPropertyHelper();
@@ -35,7 +36,7 @@ namespace Arduino.Selfienator.ViewModels
             TMoveXArrow.IsBackground = true;
             TMoveXArrow.Start();
 
-            Thread a = new Thread(p =>
+            a = new Thread(p =>
             {
                 while (true)
                 {
@@ -45,7 +46,7 @@ namespace Arduino.Selfienator.ViewModels
             });
             a.IsBackground = true;
             a.Start();
-            Thread b = new Thread(p =>
+            b = new Thread(p =>
             {
                 while (true)
                 {
@@ -130,6 +131,8 @@ namespace Arduino.Selfienator.ViewModels
 
         private void send(object obj)
         {
+            a.Abort();
+            b.Abort();
             //DEBUG
 
             if ((string)obj == "A")
