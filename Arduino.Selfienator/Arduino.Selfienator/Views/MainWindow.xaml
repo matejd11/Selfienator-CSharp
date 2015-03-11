@@ -66,7 +66,7 @@
                 <Button Margin="5" Content="Send" Command="{Binding sendComm}" CommandParameter="Y" />
             </StackPanel>
         </StackPanel>
-        <Button Margin="5" Content="Send both at onece" Command="{Binding sendComm}" CommandParameter="A"/>
+        <Button Margin="5" Content="Send both at once" Command="{Binding sendComm}" CommandParameter="A"/>
         <Button Margin="5" Content="Debug" Command="{Binding debugOnComm}" CommandParameter="Y"/>
 
     </StackPanel>
