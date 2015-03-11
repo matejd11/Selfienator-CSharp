@@ -2,14 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="DebugWindow" Height="600" Width="1200" x:Name="window">
-    <StackPanel VerticalAlignment="Stretch">
+    <DockPanel LastChildFill="True">
+        <StackPanel Margin="15 0 15 15" DockPanel.Dock="Bottom">
+            <Button Content="Clear" Command="{Binding clearComm}"/>
+        </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Incomming:" Margin="20 10"/>
-            <RichTextBox Grid.Column="0" Margin="15 35 15 15" KeyDown="RichTextBox_KeyDown">
+            <TextBlock  Grid.Column="0" Text="Incomming:" Margin="20 10"/>
+            <RichTextBox Grid.Column="0" Margin="15 35 15 15" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+         ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="RichTextBox_KeyDown">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text="{Binding incomingMessage}"/>
@@ -17,7 +21,8 @@
                 </FlowDocument>
             </RichTextBox>
             <TextBlock Grid.Column="1" Text="Outgoing:" Margin="20 10"/>
-            <RichTextBox Grid.Column="1" Margin="15 35 15 15" KeyDown="RichTextBox_KeyDown">
+            <RichTextBox Grid.Column="1" Margin="15 35 15 15" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+         ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="RichTextBox_KeyDown">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text="{Binding outgoingMessage}"/>
@@ -25,6 +30,5 @@
                 </FlowDocument>
             </RichTextBox>
         </Grid>
-        <Button Content="Clear" Command="{Binding clearComm}"/>
-    </StackPanel>
+    </DockPanel>
 </Window>

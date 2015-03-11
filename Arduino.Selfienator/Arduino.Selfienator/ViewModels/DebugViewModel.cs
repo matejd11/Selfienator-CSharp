@@ -62,12 +62,12 @@ namespace Arduino.Selfienator.Views
         {
             if (e.isIncoming == true)
             {
-                incomingMessage += e.message + "\n";
+                incomingMessage += e.message.Trim() + "\n";
                 outgoingMessage += "<---\n";
             }
             if (e.isIncoming == false)
             {
-                outgoingMessage += e.message + "\n";
+                outgoingMessage += e.message.Trim() + "\n";
                 incomingMessage += "--->\n";
             }
         }
