@@ -78,6 +78,23 @@ namespace Arduino.Selfienator.ViewModels
         public ICommand debugOnComm { get { return new ActionCommand(startDebug); } }
         public ICommand leftComm { get { return new ActionCommand(left); } }
         public ICommand rightComm { get { return new ActionCommand(right); } }
+        public ICommand FocusShotComm { get { return new ActionCommand(FocusShot); } }
+
+        private void FocusShot(object obj)
+        {
+            if ((string)obj == "FS")
+            {
+                Serial.GetInstance().send(Serial.getCommands().focusAndShot());
+            }
+            else if ((string)obj == "F")
+            {
+                Serial.GetInstance().send(Serial.getCommands().focus());
+            }
+            else if ((string)obj == "S")
+            {
+                Serial.GetInstance().send(Serial.getCommands().shot());
+            }
+        }
 
         private void right(object obj)
         {

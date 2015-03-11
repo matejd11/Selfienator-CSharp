@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 
 namespace Arduino.Selfienator.Views
 {
@@ -18,6 +19,19 @@ namespace Arduino.Selfienator.Views
         {
 
         }
+
+        public ICommand clearComm
+        {
+            get
+            {
+                return new ActionCommand(p =>
+                {
+                    incomingMessage = "";
+                    outgoingMessage = "";
+                });
+            }
+        }
+
         public DebugViewModel(int windowsHashCode)
         {
             EventAggregator.getInstance().SubsribeEvent(this);
@@ -48,13 +62,13 @@ namespace Arduino.Selfienator.Views
         {
             if (e.isIncoming == true)
             {
-                incomingMessage += "\n" +e.message;
-                outgoingMessage += "\n";
+                incomingMessage += e.message + "\n";
+                outgoingMessage += "<---\n";
             }
             if (e.isIncoming == false)
             {
-                outgoingMessage += "\n" + e.message;
-                incomingMessage += "\n";
+                outgoingMessage += e.message + "\n";
+                incomingMessage += "--->\n";
             }
         }
     }

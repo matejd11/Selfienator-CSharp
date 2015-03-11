@@ -8,6 +8,9 @@
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="473.15" Width="391">
     <StackPanel>
+        <Button Content="Focus" Command="{Binding FocusShotComm}" CommandParameter="F"/>
+        <Button Content="Shot" Command="{Binding FocusShotComm}" CommandParameter="S"/>
+        <Button Content="Focus &amp; Shot" Command="{Binding FocusShotComm}" CommandParameter="FS"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center">
                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="UniformToFill" Height="{Binding xArrow.heightView}" Width="{Binding xArrow.widthView}">

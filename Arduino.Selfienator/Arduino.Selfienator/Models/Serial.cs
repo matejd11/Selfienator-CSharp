@@ -6,10 +6,11 @@ using System.Threading;
 
 namespace Arduino.Selfienator.Models
 {
-    public class Serial
+    public class Serial :IDisposable
     {
         private static Serial _instance;
         private static ICommands _commands;
+        private string inData;
         public static Serial GetInstance(string port, int bitRate)
         {
 
@@ -39,23 +40,32 @@ namespace Arduino.Selfienator.Models
         public Serial(string port, int bitRate)
         {
             serial = new SerialPort(port, bitRate);
+            serial.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
             serial.Open();
-            Thread scanThread = new Thread(p =>
-            {
-                while (true)
-                {
-                    //TODO: create reading from COM port
+        }
 
-                }
-            });
-            scanThread.IsBackground = true;
-            scanThread.Start();
+        private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            inData += serial.ReadExisting();
+            if (inData.Contains(";"))
+            {
+                EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData});
+                inData = "";
+            }
         }
 
         public void send(string message)
         {
             serial.Write(message);
             EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = false, message = message });
+        }
+
+        public void Dispose()
+        {
+            if (serial != null)
+            {
+                serial.Dispose();
+            }
         }
     }
 }
