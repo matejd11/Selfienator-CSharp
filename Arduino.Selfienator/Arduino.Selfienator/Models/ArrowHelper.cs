@@ -6,11 +6,8 @@ namespace Arduino.Selfienator.Models
     public class ArrowHelper : ViewModel
     {
         private double _angle;
-        private double _width;
-        private double _height;
         private double _widthView;
         private double _heightView;
-        private double _margin;
 
         private double _goalAngle;
         private int _goalDirection;
@@ -22,11 +19,8 @@ namespace Arduino.Selfienator.Models
 
         public ArrowHelper()
         {
-            height = 100;
-            width = 100;
             widthView = 150;
             heightView = 150;
-            margin = (widthView - height) / 2;
             angle = 0;
             _isExecuting = false;
         }
@@ -42,29 +36,6 @@ namespace Arduino.Selfienator.Models
                     _angle = 360 + _angle;
                 }
                 _angle %= 360;
-                width = Math.Abs(Math.Cos(ConvertToRadians(_angle)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (_angle))) * 100);
-                height = Math.Abs(Math.Cos(ConvertToRadians(_angle)) * 100) + Math.Abs(Math.Cos(ConvertToRadians(90 - (_angle))) * 100);
-                widthView = 150;
-                heightView = 150;
-                margin = (widthView - height) / 2;
-                NotifyPropertyChanged();
-            }
-        }
-        public double width
-        {
-            get { return _width; }
-            set
-            {
-                _width = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public double height
-        {
-            get { return _height; }
-            set
-            {
-                _height = value;
                 NotifyPropertyChanged();
             }
         }
@@ -83,15 +54,6 @@ namespace Arduino.Selfienator.Models
             set
             {
                 _heightView = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public double margin
-        {
-            get { return _margin; }
-            set
-            {
-                _margin = value;
                 NotifyPropertyChanged();
             }
         }
@@ -145,22 +107,21 @@ namespace Arduino.Selfienator.Models
             {
                 if (_goalAngle != _angle)
                 {
+                    _deltaTime = (DateTime.Now - _LastTime);
                     if (_deltaTime.TotalMilliseconds > _goalDelay)
                     {
                         if (_goalDirection == Direction.CLOCK_WISE)
                         {
                             angle += 1;
+                            //Console.WriteLine(_goalAngle - _deltaTime.Milliseconds);
                         }
                         else if (_goalDirection == Direction.COUNTER_CLOCK_WISE)
                         {
                             angle -= 1;
+                            //Console.WriteLine(_goalAngle - _deltaTime.Milliseconds);
                         }
-
-                        _deltaTime = new TimeSpan();
                         _LastTime = DateTime.Now;
-                        double a = _deltaTime.TotalMilliseconds;
                     }
-                    _deltaTime = (DateTime.Now - _LastTime);
                 }
                 else if (_goalAngle == angle)
                 {

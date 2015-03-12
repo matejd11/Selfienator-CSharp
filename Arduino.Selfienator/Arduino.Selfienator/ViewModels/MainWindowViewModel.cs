@@ -1,6 +1,7 @@
 ﻿using Arduino.Selfienator.Core;
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
+using System;
 using System.Threading;
 using System.Windows.Input;
 
@@ -33,9 +34,9 @@ namespace Arduino.Selfienator.ViewModels
             TMoveXArrow = new Thread(MoveXArrow);
             TMoveXArrow.IsBackground = true;
             TMoveXArrow.Start();
-            TMoveYArrow = new Thread(MoveYArrow);
-            TMoveYArrow.IsBackground = true;
-            TMoveYArrow.Start();
+            //TMoveYArrow = new Thread(MoveYArrow);
+            //TMoveYArrow.IsBackground = true;
+            //TMoveYArrow.Start();
         }
         public int[] directions { get; set; }
 
@@ -176,6 +177,7 @@ namespace Arduino.Selfienator.ViewModels
         {
             while (true)
             {
+                yArrow.arrow.Update();
                 xArrow.arrow.Update();
                 //Thread.Sleep(0);
             }
