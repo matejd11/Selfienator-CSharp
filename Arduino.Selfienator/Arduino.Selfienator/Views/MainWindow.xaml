@@ -6,22 +6,24 @@
         xmlns:My="clr-namespace:Arduino.Selfienator.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        Closing="Window_Closing" 
         Title="MainWindow" Height="532.15" Width="391">
+    <!--
+        d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"-->
     <StackPanel>
         <Button Content="Focus" Command="{Binding FocusShotComm}" CommandParameter="F"/>
         <Button Content="Shot" Command="{Binding FocusShotComm}" CommandParameter="S"/>
         <Button Content="Focus &amp; Shot" Command="{Binding FocusShotComm}" CommandParameter="FS"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center">
-                <My:ArrowUserControl DataContext="{Binding xArrow}"></My:ArrowUserControl>
+                <My:ArrowUserControl DataContext="{Binding xArrow}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Command="{Binding leftComm}" CommandParameter="X" Margin="5" Content="left"/>
                     <Button Command="{Binding rightComm}" CommandParameter="X" Margin="5" Content="right"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel VerticalAlignment="Center">
-                <My:ArrowUserControl DataContext="{Binding yArrow}"></My:ArrowUserControl>
+                <My:ArrowUserControl DataContext="{Binding yArrow}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Command="{Binding leftComm}" CommandParameter="Y" Margin="5" Content="left"/>
                     <Button Command="{Binding rightComm}" CommandParameter="Y" Margin="5" Content="right"/>

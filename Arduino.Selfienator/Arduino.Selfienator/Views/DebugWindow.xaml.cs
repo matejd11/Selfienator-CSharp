@@ -34,6 +34,10 @@ namespace Arduino.Selfienator.Views
             {
                 this.Close();
             }
+            if (e.targetWindow == "DebugWindow")
+            {
+                this.Close();
+            }
         }
 
         private void RichTextBox_KeyDown(object sender, KeyEventArgs e)

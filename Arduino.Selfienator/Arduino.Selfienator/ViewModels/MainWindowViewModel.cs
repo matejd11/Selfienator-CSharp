@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
 using System;
@@ -16,6 +17,7 @@ namespace Arduino.Selfienator.ViewModels
         private CommandPropertyHelper _y;
 
         private Thread TMoveXArrow;
+        private Thread TMoveYArrow;
 
         public MainWindowViewModel()
             : this(0)
@@ -28,12 +30,15 @@ namespace Arduino.Selfienator.ViewModels
             x = new CommandPropertyHelper();
             y = new CommandPropertyHelper();
             xArrow = new ArrowUserControlVM();
-            yArrow = new ArrowUserControlVM() { arrow = new ArrowHelper() { angle = 180} };
+            yArrow = new ArrowUserControlVM() { arrow = new ArrowHelper() { angle = 180 } };
             _windowHashCode = hashCode;
             directions = new int[] { 0, 1 };
             TMoveXArrow = new Thread(MoveXArrow);
             TMoveXArrow.IsBackground = true;
             TMoveXArrow.Start();
+            TMoveYArrow = new Thread(MoveYArrow);
+            TMoveYArrow.IsBackground = true;
+            TMoveYArrow.Start();
         }
         public int[] directions { get; set; }
 
@@ -115,7 +120,7 @@ namespace Arduino.Selfienator.ViewModels
             }
             else if ((string)obj == "Y")
             {
-                _yArrow.SubAngle(5); 
+                _yArrow.SubAngle(5);
             }
         }
 
@@ -174,11 +179,18 @@ namespace Arduino.Selfienator.ViewModels
         {
             while (true)
             {
-                xArrow.Update();
-                yArrow.Update();
+                xArrow.arrow.Update();
                 Thread.Sleep(0);
             }
         }
 
+        private void MoveYArrow(object obj)
+        {
+            while (true)
+            {
+                yArrow.arrow.Update();
+                Thread.Sleep(0);
+            }
+        }
     }
 }

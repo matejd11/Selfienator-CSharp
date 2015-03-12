@@ -1,4 +1,5 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events.Debug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -151,6 +152,7 @@ namespace Arduino.Selfienator.Models
                 {
                     if (_deltaTime.TotalMilliseconds > _goalDelay)
                     {
+                        EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { message = _deltaTime.ToString() });
                         if (_goalDirection == Direction.CLOCK_WISE)
                         {
                             angle += 1;

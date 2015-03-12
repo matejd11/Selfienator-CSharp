@@ -23,5 +23,10 @@ namespace Arduino.Selfienator
                 this.Close();
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { targetWindow = "DebugWindow" });
+        }
     }
 }

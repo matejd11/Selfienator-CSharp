@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:Arduino.Selfienator.ViewModels"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance viewModels:ArrowUserControlVM, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
+    <!--d:DataContext="{d:DesignInstance viewModels:ArrowUserControlVM, IsDesignTimeCreatable=True}"-->
 
-    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="UniformToFill" Height="{Binding arrow.heightView}" Width="{Binding arrow.widthView}">
+    <Viewbox Stretch="UniformToFill" Height="{Binding arrow.heightView}" Width="{Binding arrow.widthView}">
         <Canvas Height="{Binding arrow.heightView}" Width="{Binding arrow.widthView}">
             <Canvas.LayoutTransform>
                 <RotateTransform Angle="{Binding arrow.angle}"/>
