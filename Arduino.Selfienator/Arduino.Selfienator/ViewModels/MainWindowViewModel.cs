@@ -10,8 +10,8 @@ namespace Arduino.Selfienator.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        private ArrowHelper _xArrow;
-        private ArrowHelper _yArrow;
+        private ArrowUserControlVM _xArrow;
+        private ArrowUserControlVM _yArrow;
         private CommandPropertyHelper _x;
         private CommandPropertyHelper _y;
 
@@ -27,8 +27,8 @@ namespace Arduino.Selfienator.ViewModels
         {
             x = new CommandPropertyHelper();
             y = new CommandPropertyHelper();
-            xArrow = new ArrowHelper();
-            yArrow = new ArrowHelper() { angle = 180 };
+            xArrow = new ArrowUserControlVM();
+            yArrow = new ArrowUserControlVM() { arrow = new ArrowHelper() { angle = 180} };
             _windowHashCode = hashCode;
             directions = new int[] { 0, 1 };
             TMoveXArrow = new Thread(MoveXArrow);
@@ -37,7 +37,7 @@ namespace Arduino.Selfienator.ViewModels
         }
         public int[] directions { get; set; }
 
-        public ArrowHelper xArrow
+        public ArrowUserControlVM xArrow
         {
             get { return _xArrow; }
             set
@@ -46,7 +46,7 @@ namespace Arduino.Selfienator.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        public ArrowHelper yArrow
+        public ArrowUserControlVM yArrow
         {
             get { return _yArrow; }
             set
@@ -100,22 +100,22 @@ namespace Arduino.Selfienator.ViewModels
         {
             if ((string)obj == "X")
             {
-                _xArrow.angle += 5;
+                _xArrow.AddAngle(5);
             }
             else if ((string)obj == "Y")
             {
-                _yArrow.angle += 5;
+                _yArrow.AddAngle(5);
             }
         }
         private void left(object obj)
         {
             if ((string)obj == "X")
             {
-                _xArrow.angle -= 5;
+                _xArrow.SubAngle(5);
             }
             else if ((string)obj == "Y")
             {
-                _yArrow.angle -= 5;
+                _yArrow.SubAngle(5); 
             }
         }
 

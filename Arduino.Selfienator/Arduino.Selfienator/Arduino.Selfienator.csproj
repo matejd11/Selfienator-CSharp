@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ArrowUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,9 +90,13 @@
     <Compile Include="Core\ViewModel.cs" />
     <Compile Include="Core\Events\ECloseWindow.cs" />
     <Compile Include="Models\CommandPropertyHelper.cs" />
+    <Compile Include="ViewModels\ArrowUserControlVM.cs" />
     <Compile Include="ViewModels\LoadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\DebugViewModel.cs" />
+    <Compile Include="Views\ArrowUserControl.xaml.cs">
+      <DependentUpon>ArrowUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>

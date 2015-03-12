@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Arduino.Selfienator.Models
 {
-    public class Serial :IDisposable
+    public class Serial : IDisposable
     {
         private static Serial _instance;
         private static ICommands _commands;

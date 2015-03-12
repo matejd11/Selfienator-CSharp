@@ -2,8 +2,8 @@
 {
     public interface IWindowFactory
     {
-        void CreateNewWindow();
+        int CreateNewWindow();
 
-        void CreateNewDialogWindow();
+        int CreateNewDialogWindow();
     }
 }

@@ -12,16 +12,18 @@ namespace Arduino.Selfienator.Core
         where T : Window, new()
     {
         private static WindowFactory<T> _instance;
-        public void CreateNewWindow()
+        public int CreateNewWindow()
         {
             T window = new T();
             window.Show();
+            return window.GetHashCode();
         }
 
-        public void CreateNewDialogWindow()
+        public int CreateNewDialogWindow()
         {
             T window = new T();
-            window.ShowDialog(); 
+            window.ShowDialog();
+            return window.GetHashCode(); 
         }
 
         public static WindowFactory<T> getInstance()
@@ -35,7 +37,7 @@ namespace Arduino.Selfienator.Core
 
         public void OnEventHandler(EOpenWindow<T> e)
         {
-            throw new NotImplementedException();
+            WindowFactory<T>.getInstance().CreateNewWindow();
         }
     }
 }
