@@ -105,7 +105,7 @@ namespace Arduino.Selfienator.Models
         {
             if (_isExecuting)
             {
-                if (_goalAngle != _angle)
+                if (_goalAngle != angle)
                 {
                     _deltaTime = (DateTime.Now - _LastTime);
                     if (_deltaTime.TotalMilliseconds > _goalDelay)

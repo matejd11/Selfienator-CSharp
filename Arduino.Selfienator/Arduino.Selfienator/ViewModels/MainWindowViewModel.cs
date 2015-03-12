@@ -178,7 +178,7 @@ namespace Arduino.Selfienator.ViewModels
             while (true)
             {
                 xArrow.arrow.Update();
-                //Thread.Sleep(0);
+                Thread.Sleep(0);
             }
         }
 
@@ -187,7 +187,7 @@ namespace Arduino.Selfienator.ViewModels
             while (true)
             {
                 yArrow.arrow.Update();
-                //Thread.Sleep(0);
+                Thread.Sleep(0);
             }
         }
     }
