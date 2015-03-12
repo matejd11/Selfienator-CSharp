@@ -2,7 +2,6 @@
 using Arduino.Selfienator.Core.Events.Debug;
 using System;
 using System.IO.Ports;
-using System.Threading;
 
 namespace Arduino.Selfienator.Models
 {
@@ -47,10 +46,13 @@ namespace Arduino.Selfienator.Models
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             inData += serial.ReadExisting();
-            if (inData.Contains(";"))
+            while (inData.Contains(";"))
             {
-                EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData});
-                inData = "";
+                int index = inData.IndexOf(";");
+                string tmp = inData.Substring(index + 1, inData.Length - index - 1);
+                inData = inData.Substring(0, index);
+                EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData });
+                inData = tmp;
             }
         }
 

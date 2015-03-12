@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Arduino.Selfienator.Core
+﻿namespace Arduino.Selfienator.Core
 {
     public interface ICommands
     {

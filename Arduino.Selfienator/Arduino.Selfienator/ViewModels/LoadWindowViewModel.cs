@@ -1,7 +1,6 @@
 ﻿using Arduino.Selfienator.Core;
 using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.Models;
-using Arduino.Selfienator.Views;
 using System;
 using System.IO.Ports;
 using System.Windows.Input;

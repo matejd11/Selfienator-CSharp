@@ -1,10 +1,7 @@
 ﻿using Arduino.Selfienator.Core;
-using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
-using System;
 using System.Threading;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Arduino.Selfienator.ViewModels
@@ -180,7 +177,7 @@ namespace Arduino.Selfienator.ViewModels
             while (true)
             {
                 xArrow.arrow.Update();
-                Thread.Sleep(0);
+                //Thread.Sleep(0);
             }
         }
 
@@ -189,7 +186,7 @@ namespace Arduino.Selfienator.ViewModels
             while (true)
             {
                 yArrow.arrow.Update();
-                Thread.Sleep(0);
+                //Thread.Sleep(0);
             }
         }
     }
