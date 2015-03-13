@@ -13,7 +13,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock  Grid.Column="0" Text="Incomming:" Margin="20 10"/>
             <RichTextBox Grid.Column="0" Margin="15 35 15 15" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-         ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="RichTextBox_KeyDown">
+         ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="RichTextBox_KeyDown" TextChanged="RichTextBox_TextChanged">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text="{Binding incomingMessage}"/>
@@ -22,7 +22,7 @@
             </RichTextBox>
             <TextBlock Grid.Column="1" Text="Outgoing:" Margin="20 10"/>
             <RichTextBox Grid.Column="1" Margin="15 35 15 15" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-         ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="RichTextBox_KeyDown">
+         ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="RichTextBox_KeyDown" TextChanged="RichTextBox_TextChanged">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text="{Binding outgoingMessage}"/>
