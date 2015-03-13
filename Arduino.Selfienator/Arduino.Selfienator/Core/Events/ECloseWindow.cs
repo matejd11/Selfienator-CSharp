@@ -1,5 +1,4 @@
-﻿
-namespace Arduino.Selfienator.Core.Events
+﻿namespace Arduino.Selfienator.Core.Events
 {
     public class ECloseWindow
     {

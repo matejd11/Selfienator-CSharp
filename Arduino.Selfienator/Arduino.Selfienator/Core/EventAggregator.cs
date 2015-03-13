@@ -50,7 +50,7 @@ namespace Arduino.Selfienator.Core
             }
         }
 
-        public void SubsribeEvent(object subscriber)
+        public void Subsribe(object subscriber)
         {
             lock (lockSubscriberDictionary)
             {

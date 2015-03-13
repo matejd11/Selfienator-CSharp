@@ -74,6 +74,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Direction.cs" />
+    <Compile Include="Core\Events\Debug\ECancelDebug.cs" />
     <Compile Include="Core\Events\Debug\EDebugMessage.cs" />
     <Compile Include="Core\Events\EOpenWindow.cs" />
     <Compile Include="Core\ICommands.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Core\Events\ECloseWindow.cs" />
     <Compile Include="Models\CommandPropertyHelper.cs" />
     <Compile Include="ViewModels\ArrowUserControlVM.cs" />
+    <Compile Include="Core\Events\ESetFocus.cs" />
     <Compile Include="ViewModels\LoadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\DebugViewModel.cs" />

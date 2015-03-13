@@ -7,13 +7,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
         mc:Ignorable="d"
         Closing="Window_Closing" 
-        Title="MainWindow" Height="532.15" Width="391">
+        Title="MainWindow" Height="539.15" Width="391">
     <!--
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"-->
     <StackPanel>
-        <Button Content="Focus" Command="{Binding FocusShotComm}" CommandParameter="F"/>
-        <Button Content="Shot" Command="{Binding FocusShotComm}" CommandParameter="S"/>
-        <Button Content="Focus &amp; Shot" Command="{Binding FocusShotComm}" CommandParameter="FS"/>
+        <Menu IsMainMenu="True">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Close" Command="{Binding closeComm}" />
+            </MenuItem>
+            <MenuItem Header="_Debug">
+                <MenuItem IsCheckable="True" IsChecked="{Binding debugOpend}" Header="_Debug" Command="{Binding debugOnComm}" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="5" Width="100" Content="Focus" Command="{Binding FocusShotComm}" CommandParameter="F"/>
+            <Button Margin="5" Width="100" Content="Shot" Command="{Binding FocusShotComm}" CommandParameter="S"/>
+            <Button Margin="5" Width="100" Content="Focus &amp; Shot" Command="{Binding FocusShotComm}" CommandParameter="FS"/>
+        </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center">
                 <My:ArrowUserControl DataContext="{Binding xArrow}" />
@@ -51,7 +61,6 @@
             </StackPanel>
         </StackPanel>
         <Button Margin="5" Content="Send both at once" Command="{Binding sendComm}" CommandParameter="A"/>
-        <Button Margin="5" Content="Debug" Command="{Binding debugOnComm}" CommandParameter="Y"/>
 
     </StackPanel>
 </Window>

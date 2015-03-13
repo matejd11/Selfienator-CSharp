@@ -13,6 +13,7 @@ namespace Arduino.Selfienator
         public MainWindow()
         {
             InitializeComponent();
+            EventAggregator.getInstance().Subsribe(this);
             this.DataContext = new MainWindowViewModel(this.GetHashCode());
         }
 

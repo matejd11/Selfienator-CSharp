@@ -1,4 +1,6 @@
 ﻿using Arduino.Selfienator.Core;
+using Arduino.Selfienator.Core.Events;
+using Arduino.Selfienator.Core.Events.Debug;
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
 using System;
@@ -7,7 +9,7 @@ using System.Windows.Input;
 
 namespace Arduino.Selfienator.ViewModels
 {
-    public class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel, ISubscriber<ECancelDebug>
     {
         private ArrowUserControlVM _xArrow;
         private ArrowUserControlVM _yArrow;
@@ -17,6 +19,8 @@ namespace Arduino.Selfienator.ViewModels
         private Thread TMoveXArrow;
         private Thread TMoveYArrow;
 
+        private bool _debugOpend;
+
         public MainWindowViewModel()
             : this(0)
         {
@@ -25,6 +29,7 @@ namespace Arduino.Selfienator.ViewModels
 
         public MainWindowViewModel(int hashCode)
         {
+            EventAggregator.getInstance().Subsribe(this);
             x = new CommandPropertyHelper();
             y = new CommandPropertyHelper();
             xArrow = new ArrowUserControlVM();
@@ -77,11 +82,27 @@ namespace Arduino.Selfienator.ViewModels
             }
         }
 
+        public bool debugOpend
+        {
+            get { return _debugOpend; }
+            set
+            {
+                _debugOpend = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ICommand sendComm { get { return new ActionCommand(send); } }
         public ICommand debugOnComm { get { return new ActionCommand(startDebug); } }
         public ICommand leftComm { get { return new ActionCommand(left); } }
         public ICommand rightComm { get { return new ActionCommand(right); } }
         public ICommand FocusShotComm { get { return new ActionCommand(FocusShot); } }
+        public ICommand closeComm { get { return new ActionCommand(close); } }
+
+        private void close(object obj)
+        {
+            EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
+        }
 
         private void FocusShot(object obj)
         {
@@ -124,7 +145,16 @@ namespace Arduino.Selfienator.ViewModels
 
         private void startDebug(object obj)
         {
-            WindowFactory<DebugWindow>.getInstance().CreateNewWindow();
+            if (_debugOpend)
+            {
+                WindowFactory<DebugWindow>.getInstance().CreateNewWindow();
+            }
+            else
+            {
+                //EventAggregator.getInstance().PublishEvent<ESetFocus>(new ESetFocus() { targetWindow = "DebugWindow" }); 
+                //debugOpend = true;
+                EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { targetWindow = "DebugWindow" });
+            }
         }
 
         private void send(object obj)
@@ -191,6 +221,11 @@ namespace Arduino.Selfienator.ViewModels
                 Thread.Yield();
                 //Thread.Sleep(1);
             }
+        }
+
+        public void OnEventHandler(ECancelDebug e)
+        {
+            debugOpend = false;
         }
     }
 }

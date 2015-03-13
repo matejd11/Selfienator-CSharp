@@ -1,5 +1,6 @@
 ﻿using Arduino.Selfienator.Core;
 using Arduino.Selfienator.Core.Events;
+using Arduino.Selfienator.Core.Events.Debug;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,12 +10,12 @@ namespace Arduino.Selfienator.Views
     /// <summary>
     /// Interaction logic for DebugWindow.xaml
     /// </summary>
-    public partial class DebugWindow : Window, ISubscriber<ECloseWindow>
+    public partial class DebugWindow : Window, ISubscriber<ECloseWindow>, ISubscriber<ESetFocus>
     {
         public DebugWindow()
         {
             InitializeComponent();
-            EventAggregator.getInstance().SubsribeEvent(this);
+            EventAggregator.getInstance().Subsribe(this);
             this.DataContext = new DebugViewModel(this.GetHashCode());
         }
 
@@ -30,6 +31,14 @@ namespace Arduino.Selfienator.Views
             }
         }
 
+        public void OnEventHandler(ESetFocus e)
+        {
+            if (e.targetWindow == "DebugWindow")
+            {
+                this.Focus();
+            } 
+        }
+
         private void RichTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
@@ -39,6 +48,11 @@ namespace Arduino.Selfienator.Views
         {
             ((RichTextBox)sender).ScrollToEnd();
             //TODO: scroll all the way down
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            EventAggregator.getInstance().PublishEvent<ECancelDebug>(new ECancelDebug());
         }
     }
 }
