@@ -7,14 +7,18 @@ namespace Arduino.Selfienator.Models
     {
         public string motor(double[] angle, int[] direction, int[] delay, char[] names)
         {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < angle.Length; i++)
+            if (angle.Length > 0 && direction.Length > 0 && delay.Length > 0 && names.Length > 0)
             {
-                sb.AppendFormat("M{3}-{0}-{1}-{2},", angle[i], direction[i], delay[i], names[i]);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < angle.Length; i++)
+                {
+                    sb.AppendFormat("M{3}-{0}-{1}-{2},", angle[i], direction[i], delay[i], names[i]);
+                }
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append(";");
+                return sb.ToString();
             }
-            sb.Remove(sb.Length-1, 1);
-            sb.Append(";");
-            return sb.ToString();
+            return "";
         }
         public string motorX(double angle, int direction, int delay = 5)
         {

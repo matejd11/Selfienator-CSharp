@@ -2,7 +2,7 @@
 
 namespace Arduino.Selfienator.ViewModels
 {
-    public class CommandPropertyHelper:ViewModel
+    public class CommandPropertyHelper : ViewModel
     {
         private int _angle;
         private int _direction;
@@ -14,6 +14,7 @@ namespace Arduino.Selfienator.ViewModels
             set
             {
                 _angle = value;
+                _angle %= 360;
                 NotifyPropertyChanged();
             }
         }
@@ -31,7 +32,14 @@ namespace Arduino.Selfienator.ViewModels
             get { return _delay; }
             set
             {
-                _delay = value;
+                if (value > 10)
+                {
+                    _delay = value;
+                }
+                else
+                {
+                    _delay = 10;
+                }
                 NotifyPropertyChanged();
             }
         }

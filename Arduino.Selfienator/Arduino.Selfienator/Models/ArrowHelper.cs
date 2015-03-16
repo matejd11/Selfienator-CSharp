@@ -71,8 +71,15 @@ namespace Arduino.Selfienator.Models
             get { return _goalDelay; }
             set
             {
-                _goalDelay = value;
-                NotifyPropertyChanged();
+                if (value > 10)
+                {
+                    _goalDelay = value;
+                }
+                else
+                {
+                    _goalDelay = 10;
+                }
+                 NotifyPropertyChanged();
             }
         }
         public int goalDirection
