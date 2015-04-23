@@ -153,11 +153,12 @@ namespace Arduino.Selfienator.ViewModels
                     Serial.GetInstance().send(Serial.getCommands().motorX(anglee, direction, 50));
 
                     xArrow.startExecuting((int)anglee, direction, 50);
-                    Thread.Sleep((int)delay);
+                    Thread.Sleep(150);
                     Serial.GetInstance().send(Serial.getCommands().focusAndShot());
+                    Thread.Sleep((int)delay);
                     if (anglee >= angle)
                     {
-                        break;
+                        while (true) { ;}
                     }
                 }
             });
