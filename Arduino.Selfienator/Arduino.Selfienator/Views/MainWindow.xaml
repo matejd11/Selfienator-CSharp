@@ -7,7 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
         mc:Ignorable="d"
         Closing="Window_Closing" 
-        Title="MainWindow" Height="539.15" Width="391">
+        Title="MainWindow" Height="644.15" Width="391">
     <!--
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"-->
     <StackPanel>
@@ -62,5 +62,15 @@
         </StackPanel>
         <Button Margin="5" Content="Send both at once" Command="{Binding sendComm}" CommandParameter="A"/>
 
+        <StackPanel Width="150">
+            <TextBlock Margin="5" Text="Automatic:"/>
+            <TextBlock Margin="5" Text="Angle:"/>
+            <TextBox Margin="5" Text="{Binding angle}"/>
+            <TextBlock Margin="5" Text="Direction:"/>
+            <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding direction}"/>
+            <TextBlock Margin="5" Text="Delay:"/>
+            <TextBox Margin="5" Text="{Binding delay}"/>
+            <Button Margin="5" Content="Send" Command="{Binding AutomatComm}" />
+        </StackPanel>
     </StackPanel>
 </Window>

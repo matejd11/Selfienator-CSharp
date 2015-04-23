@@ -46,13 +46,17 @@ namespace Arduino.Selfienator.Models
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             inData += serial.ReadExisting();
-            while (inData.Contains(";"))
+            while (inData.Contains("\n"))
             {
                 int index = inData.IndexOf(";");
                 string tmp = inData.Substring(index + 1, inData.Length - index - 1);
-                inData = inData.Substring(0, index);
-                EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData });
-                inData = tmp;
+                if (index != -1)
+                {
+                    inData = inData.Substring(0, index);
+                    EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData });
+                    inData = tmp;
+                }
+                inData = inData.TrimStart();
             }
         }
 

@@ -98,6 +98,71 @@ namespace Arduino.Selfienator.ViewModels
         public ICommand rightComm { get { return new ActionCommand(right); } }
         public ICommand FocusShotComm { get { return new ActionCommand(FocusShot); } }
         public ICommand closeComm { get { return new ActionCommand(close); } }
+        public ICommand AutomatComm { get { return new ActionCommand(Automat); } }
+
+
+        private int _direction;
+
+        public int direction
+        {
+            get { return _direction; }
+            set
+            {
+                _direction = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private double _angle;
+
+        public double angle
+        {
+            get { return _angle; }
+            set
+            {
+                _angle = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double _delay;
+
+        public double delay
+        {
+            get { return _delay; }
+            set
+            {
+                _delay = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private void Automat(object obj)
+        {
+            Thread a = new Thread(() =>
+            {
+                double anglee = 0;
+                var commands = new Commands();
+                while (true)
+                {
+                    anglee += 20;
+                    anglee %= 360;
+
+                    Serial.GetInstance().send(Serial.getCommands().motorX(anglee, direction, 50));
+
+                    xArrow.startExecuting((int)anglee, direction, 50);
+                    Thread.Sleep((int)delay);
+                    Serial.GetInstance().send(Serial.getCommands().focusAndShot());
+                    if (anglee >= angle)
+                    {
+                        break;
+                    }
+                }
+            });
+            a.Start();
+        }
 
         private void close(object obj)
         {
