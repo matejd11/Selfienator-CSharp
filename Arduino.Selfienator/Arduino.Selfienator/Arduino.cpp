@@ -5,9 +5,9 @@ Servo myservo;  // create servo object to control a servo
 const int CLOCK_WISE = 0;
 const int COUNTER_CLOCK_WISE = 1;
 
-const int commCamera = 8;
-const int shotPin = 7;
-const int focusPin = 6;
+const int commCamera = 7;
+const int shotPin = 6;
+const int focusPin = 5;
 
 int motorX[] = {
 	0b00111001,
@@ -22,7 +22,7 @@ int motorX[] = {
 
 int motorXres = 0b11000000;
 
-int myservoPin = 9;
+int myservoPin = 4;
 
 bool x_isExecuting = false;
 double x_steepAngle = 0.9;
