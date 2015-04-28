@@ -3,7 +3,6 @@ using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.Models;
 using System;
 using System.IO.Ports;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Arduino.Selfienator.ViewModels
@@ -65,6 +64,7 @@ namespace Arduino.Selfienator.ViewModels
                 EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
                 WindowFactory<MainWindow>.getInstance().CreateNewWindow();
             }
+
 
         }
 

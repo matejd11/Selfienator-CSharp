@@ -3,7 +3,6 @@ using Arduino.Selfienator.Core.Events;
 using Arduino.Selfienator.Core.Events.Debug;
 using Arduino.Selfienator.Models;
 using Arduino.Selfienator.Views;
-using System;
 using System.Threading;
 using System.Windows.Input;
 

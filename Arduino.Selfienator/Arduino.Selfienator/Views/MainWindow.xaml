@@ -4,73 +4,146 @@
         xmlns:viewModels="clr-namespace:Arduino.Selfienator.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:My="clr-namespace:Arduino.Selfienator.Views"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Closing="Window_Closing" 
-        Title="MainWindow" Height="644.15" Width="391">
+        Closing="Window_Closing"
+        Title="MainWindow"
+        Height="730.2"
+        Width="469.84">
     <!--
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"-->
     <StackPanel>
         <Menu IsMainMenu="True">
             <MenuItem Header="_File">
-                <MenuItem Header="_Close" Command="{Binding closeComm}" />
+                <MenuItem Header="_Close"
+                          Command="{Binding closeComm}" />
             </MenuItem>
             <MenuItem Header="_Debug">
-                <MenuItem IsCheckable="True" IsChecked="{Binding debugOpend}" Header="_Debug" Command="{Binding debugOnComm}" />
+                <MenuItem IsCheckable="True"
+                          IsChecked="{Binding debugOpend}"
+                          Header="_Debug"
+                          Command="{Binding debugOnComm}" />
             </MenuItem>
         </Menu>
-        <StackPanel Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="5" Width="100" Content="Focus" Command="{Binding FocusShotComm}" CommandParameter="F"/>
-            <Button Margin="5" Width="100" Content="Shot" Command="{Binding FocusShotComm}" CommandParameter="S"/>
-            <Button Margin="5" Width="100" Content="Focus &amp; Shot" Command="{Binding FocusShotComm}" CommandParameter="FS"/>
+        <StackPanel Margin="0 5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Margin="5"
+                    Width="100"
+                    Content="Focus"
+                    Command="{Binding FocusShotComm}"
+                    CommandParameter="F" />
+            <Button Margin="5"
+                    Width="100"
+                    Content="Shot"
+                    Command="{Binding FocusShotComm}"
+                    CommandParameter="S" />
+            <Button Margin="5"
+                    Width="100"
+                    Content="Focus &amp; Shot"
+                    Command="{Binding FocusShotComm}"
+                    CommandParameter="FS" />
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center">
                 <My:ArrowUserControl DataContext="{Binding xArrow}" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Command="{Binding leftComm}" CommandParameter="X" Margin="5" Content="left"/>
-                    <Button Command="{Binding rightComm}" CommandParameter="X" Margin="5" Content="right"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Command="{Binding leftComm}"
+                            CommandParameter="X"
+                            Margin="5"
+                            Content="left" />
+                    <Button Command="{Binding rightComm}"
+                            CommandParameter="X"
+                            Margin="5"
+                            Content="right" />
                 </StackPanel>
             </StackPanel>
             <StackPanel VerticalAlignment="Center">
                 <My:ArrowUserControl DataContext="{Binding yArrow}" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Command="{Binding leftComm}" CommandParameter="Y" Margin="5" Content="left"/>
-                    <Button Command="{Binding rightComm}" CommandParameter="Y" Margin="5" Content="right"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Command="{Binding leftComm}"
+                            CommandParameter="Y"
+                            Margin="5"
+                            Content="left" />
+                    <Button Command="{Binding rightComm}"
+                            CommandParameter="Y"
+                            Margin="5"
+                            Content="right" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
             <StackPanel Width="150">
-                <TextBlock Margin="5" Text="Angle:"/>
-                <TextBox Margin="5" Text="{Binding x.angle}"/>
-                <TextBlock Margin="5" Text="Direction:"/>
-                <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding x.direction}"/>
-                <TextBlock Margin="5" Text="Delay:"/>
-                <TextBox Margin="5" Text="{Binding x.delay}"/>
-                <Button Margin="5" Content="Send" Command="{Binding sendComm}" CommandParameter="X" />
+                <TextBlock Margin="5"
+                           Text="Angle:" />
+                <TextBox Margin="5"
+                         Text="{Binding x.angle}" />
+                <TextBlock Margin="5"
+                           Text="Direction:" />
+                <ComboBox Margin="5"
+                          ItemsSource="{Binding directions}"
+                          SelectedIndex="{Binding x.direction}" />
+                <TextBlock Margin="5"
+                           Text="Delay:" />
+                <TextBox Margin="5"
+                         Text="{Binding x.delay}" />
+                <Button Margin="5"
+                        Content="Send"
+                        Command="{Binding sendComm}"
+                        CommandParameter="X" />
             </StackPanel>
             <StackPanel Width="150">
-                <TextBlock Margin="5" Text="Angle:"/>
-                <TextBox Margin="5" Text="{Binding y.angle}"/>
-                <TextBlock Margin="5" Text="Direction:"/>
-                <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding y.direction}"/>
-                <TextBlock Margin="5" Text="Delay:"/>
-                <TextBox Margin="5" Text="{Binding y.delay}"/>
-                <Button Margin="5" Content="Send" Command="{Binding sendComm}" CommandParameter="Y" />
+                <TextBlock Margin="5"
+                           Text="Angle:" />
+                <TextBox Margin="5"
+                         Text="{Binding y.angle}" />
+                <TextBlock Margin="5"
+                           Text="Direction:" />
+                <ComboBox Margin="5"
+                          ItemsSource="{Binding directions}"
+                          SelectedIndex="{Binding y.direction}" />
+                <TextBlock Margin="5"
+                           Text="Delay:" />
+                <TextBox Margin="5"
+                         Text="{Binding y.delay}" />
+                <Button Margin="5"
+                        Content="Send"
+                        Command="{Binding sendComm}"
+                        CommandParameter="Y" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Margin="5"> 0 - CLOCK WISE</TextBlock>
+                <TextBlock Margin="5 5 5 10"> 1 - COUNTER CLOCK WISE</TextBlock>
             </StackPanel>
         </StackPanel>
-        <Button Margin="5" Content="Send both at once" Command="{Binding sendComm}" CommandParameter="A"/>
+        <Button Margin="5"
+                Content="Send both at once"
+                Command="{Binding sendComm}"
+                CommandParameter="A" />
 
         <StackPanel Width="150">
-            <TextBlock Margin="5" Text="Automatic:"/>
-            <TextBlock Margin="5" Text="Angle:"/>
-            <TextBox Margin="5" Text="{Binding angle}"/>
-            <TextBlock Margin="5" Text="Direction:"/>
-            <ComboBox Margin="5" ItemsSource="{Binding directions}" SelectedIndex="{Binding direction}"/>
-            <TextBlock Margin="5" Text="Delay:"/>
-            <TextBox Margin="5" Text="{Binding delay}"/>
-            <Button Margin="5" Content="Send" Command="{Binding AutomatComm}" />
+            <TextBlock Margin="5"
+                       Text="Automatic:" />
+            <TextBlock Margin="5"
+                       Text="Angle:" />
+            <TextBox Margin="5"
+                     Text="{Binding angle}" />
+            <TextBlock Margin="5"
+                       Text="Direction:" />
+            <ComboBox Margin="5"
+                      ItemsSource="{Binding directions}"
+                      SelectedIndex="{Binding direction}" />
+            <TextBlock Margin="5"
+                       Text="Delay:" />
+            <TextBox Margin="5"
+                     Text="{Binding delay}" />
+            <Button Margin="5"
+                    Content="Send"
+                    Command="{Binding AutomatComm}" />
         </StackPanel>
     </StackPanel>
 </Window>

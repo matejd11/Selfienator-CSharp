@@ -1,4 +1,8 @@
-﻿const int CLOCK_WISE = 0;
+﻿#include <Servo.h> 
+
+Servo myservo;  // create servo object to control a servo 
+
+const int CLOCK_WISE = 0;
 const int COUNTER_CLOCK_WISE = 1;
 
 const int commCamera = 8;
@@ -18,31 +22,7 @@ int motorX[] = {
 
 int motorXres = 0b11000000;
 
-int motorY[] = {
-	0b00001000,
-	//0b00101100,
-	0b00000100,
-	//0b00110110,
-	0b00000010,
-	//0b00010011,
-	0b00000001
-	//,0b00111001 
-};
-
-int motorYres = 0b11110000;
-
-int motorYCon[] = {
-	0b10000000,
-	//0b00101100,
-	0b10000000,
-	//0b00110110,
-	0b01000000,
-	//0b00010011,
-	0b01000000
-	//,0b00111001 
-};
-
-int motorYConres = 0b00111111;
+int myservoPin = 9;
 
 bool x_isExecuting = false;
 double x_steepAngle = 0.9;
@@ -87,8 +67,8 @@ void setup()
 	digitalWrite(focusPin, 1);
 	digitalWrite(shotPin, 1);
 	pinMode(13, OUTPUT);
-	DDRF |= 0b11111111;
-	DDRK |= 0b00001111;
+	DDRF |= 0b00111111;
+	myservo.attach(myservoPin);
 }
 
 void loop()
@@ -299,21 +279,7 @@ void proces()
 
 					Serial.println("yAngle:" + String(y_angle));
 
-					PORTF &= motorYConres;
-					PORTK &= motorYres;
-
-					Serial.println(PORTF, BIN);
-					Serial.println(PORTK, BIN);
-
-					y_stage = (++y_stage) % 4;
-
-					PORTF |= motorYCon[y_stage];
-					PORTK |= motorY[y_stage];
-
-					Serial.println(PORTF, BIN);
-					Serial.println(PORTK, BIN);
-					Serial.println(y_stage);
-
+					myservo.write(y_angle);
 					//MOVE
 
 				}
@@ -323,22 +289,7 @@ void proces()
 
 					Serial.println("yAngle:" + String(y_angle));
 
-					PORTF &= motorYConres;
-					PORTK &= motorYres;
-
-					Serial.println(PORTF, BIN);
-					Serial.println(PORTK, BIN);
-
-					if (y_stage < 0){
-						y_stage = 3;
-					}
-
-					PORTF |= motorYCon[y_stage];
-					PORTK |= motorY[y_stage];
-
-					Serial.println(PORTF, BIN);
-					Serial.println(PORTK, BIN);
-					Serial.println(y_stage);
+					myservo.write(y_angle);
 					//MOVE
 				}
 				y_deltaTime = 0;
