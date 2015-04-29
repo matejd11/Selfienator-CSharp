@@ -11,13 +11,21 @@ namespace Arduino.Selfienator.Models
         private static ICommands _commands;
         private string inData;
 
-        public static Serial GetInstance()
+        /*public static Serial GetInstance()
         {
             if (_instance != null || _commands != null)
             {
                 return _instance;
             }
             return null;
+        }*/
+
+        public static Serial Instance
+        {
+            get
+            {
+                return _instance;
+            }
         }
 
         public static ICommands getCommands()
