@@ -28,9 +28,12 @@ namespace Arduino.Selfienator.Models
             }
         }
 
-        public static ICommands getCommands()
+        public static ICommands Commands
         {
-            return _commands;
+            get
+            {
+                return _commands;
+            }
         }
 
         private SerialPort serial;

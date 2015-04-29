@@ -148,7 +148,7 @@ namespace Arduino.Selfienator.ViewModels
                 {
                     var yAngle = y[i];
 
-                    Serial.Instance.send(Serial.getCommands().motorY(yAngle, 0, 50));
+                    Serial.Instance.send(Serial.Commands.motorY(yAngle, 0, 50));
                     Thread.Sleep(50 * 35);
                     yArrow.startExecuting((int)yAngle, 0, 50);
 
@@ -171,17 +171,17 @@ namespace Arduino.Selfienator.ViewModels
 
                         if (i == 0 || i == 2)
                         {
-                            Serial.Instance.send(Serial.getCommands().motorX(anglee, Direction.CLOCK_WISE, 80));
+                            Serial.Instance.send(Serial.Commands.motorX(anglee, Direction.CLOCK_WISE, 80));
                             xArrow.startExecuting((int)anglee, Direction.CLOCK_WISE, 80);
                         }
                         else if (i == 1)
                         {
-                            Serial.Instance.send(Serial.getCommands().motorX(anglee, Direction.COUNTER_CLOCK_WISE, 80));
+                            Serial.Instance.send(Serial.Commands.motorX(anglee, Direction.COUNTER_CLOCK_WISE, 80));
                             xArrow.startExecuting((int)anglee, Direction.COUNTER_CLOCK_WISE, 80);
                         }
 
                         Thread.Sleep(80 * deltaangle + 500);
-                        Serial.Instance.send(Serial.getCommands().focusAndShot());
+                        Serial.Instance.send(Serial.Commands.focusAndShot());
                         Thread.Sleep(1500);
                         if (i == 0 || i == 2)
                         {
@@ -198,7 +198,7 @@ namespace Arduino.Selfienator.ViewModels
                             }
                         }
                     }
-                    Serial.Instance.send(Serial.getCommands().focusAndShot());
+                    Serial.Instance.send(Serial.Commands.focusAndShot());
                     Thread.Sleep(1500);
                 }
             });
@@ -214,15 +214,15 @@ namespace Arduino.Selfienator.ViewModels
         {
             if ((string)obj == "FS")
             {
-                Serial.Instance.send(Serial.getCommands().focusAndShot());
+                Serial.Instance.send(Serial.Commands.focusAndShot());
             }
             else if ((string)obj == "F")
             {
-                Serial.Instance.send(Serial.getCommands().focus());
+                Serial.Instance.send(Serial.Commands.focus());
             }
             else if ((string)obj == "S")
             {
-                Serial.Instance.send(Serial.getCommands().shot());
+                Serial.Instance.send(Serial.Commands.shot());
             }
         }
 
@@ -277,7 +277,7 @@ namespace Arduino.Selfienator.ViewModels
 
                 x.angle %= 360;
 
-                Serial.Instance.send(Serial.getCommands().motor(angles, directions, delays, names));
+                Serial.Instance.send(Serial.Commands.motor(angles, directions, delays, names));
 
                 xArrow.startExecuting(x.angle, x.direction, x.delay);
 
@@ -290,7 +290,7 @@ namespace Arduino.Selfienator.ViewModels
 
                 x.angle %= 360;
 
-                Serial.Instance.send(Serial.getCommands().motorX(x.angle, x.direction, x.delay));
+                Serial.Instance.send(Serial.Commands.motorX(x.angle, x.direction, x.delay));
 
                 xArrow.startExecuting(x.angle, x.direction, x.delay);
             }
@@ -301,7 +301,7 @@ namespace Arduino.Selfienator.ViewModels
 
                 y.angle %= 360;
 
-                Serial.Instance.send(Serial.getCommands().motorY(y.angle, y.direction, y.delay));
+                Serial.Instance.send(Serial.Commands.motorY(y.angle, y.direction, y.delay));
 
                 yArrow.startExecuting(y.angle, y.direction, y.delay);
             }
