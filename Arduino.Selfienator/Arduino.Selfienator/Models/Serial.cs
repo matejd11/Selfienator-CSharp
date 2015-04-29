@@ -7,27 +7,17 @@ namespace Arduino.Selfienator.Models
 {
     public class Serial : IDisposable
     {
-        private static Serial _instance;
+        private static Serial _instance = new Serial("COM6", 9600);
         private static ICommands _commands;
         private string inData;
-        public static Serial GetInstance(string port, int bitRate)
-        {
-
-            if (_instance == null || _commands == null)
-            {
-                _instance = new Serial(port, bitRate);
-                _commands = new Commands();
-            }
-            return _instance;
-        }
 
         public static Serial GetInstance()
         {
-            if (_instance == null || _commands == null)
+            if (_instance != null || _commands != null)
             {
-                return GetInstance("COM3", 9600);
+                return _instance;
             }
-            return _instance;
+            return null;
         }
 
         public static ICommands getCommands()

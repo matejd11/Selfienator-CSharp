@@ -143,6 +143,7 @@ namespace Arduino.Selfienator.ViewModels
             Thread a = new Thread(() =>
             {
                 var y = new int[] { 60, 90, 120 };
+                double anglee = 0;
                 for (int i = 0; i < 3; i++)
                 {
                     var yAngle = y[i];
@@ -154,7 +155,6 @@ namespace Arduino.Selfienator.ViewModels
                     var deltaangle = 30;
 
 
-                    double anglee = 0;
                     var commands = new Commands(); ;
                     while (true)
                     {
@@ -164,9 +164,9 @@ namespace Arduino.Selfienator.ViewModels
                             anglee -= deltaangle;
 
                         anglee %= 360;
-                        if (angle < 0)
+                        if (anglee < 0)
                         {
-                            angle = 360 + angle;
+                            anglee = 360 + anglee;
                         }
 
                         if (i == 0 || i == 2)

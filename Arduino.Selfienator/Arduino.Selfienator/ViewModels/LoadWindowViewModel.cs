@@ -59,7 +59,7 @@ namespace Arduino.Selfienator.ViewModels
 
             //TODO: Check if port is still opened, Open mainWindow, Open port
 
-            if (Serial.GetInstance(portName, bitRate) != null)
+            if (Serial.GetInstance() != null)
             {
                 EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
                 WindowFactory<MainWindow>.getInstance().CreateNewWindow();
