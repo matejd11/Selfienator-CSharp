@@ -271,7 +271,7 @@ void proces()
 		{
 			if (y_deltaTime >= y_goalDelay)
 			{
-				if (y_angle > y_goalAngle)
+				if (y_angle < y_goalAngle)
 				{
 					y_angle += y_steepAngle;
 
@@ -281,7 +281,7 @@ void proces()
 					//MOVE
 
 				}
-				else if (y_angle < y_goalAngle)
+				else if (y_angle > y_goalAngle)
 				{
 					y_angle -= y_steepAngle;
 
