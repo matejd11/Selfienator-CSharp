@@ -298,7 +298,6 @@ void proces()
 		}
 		if (y_goalAngle == y_angle)
 		{
-			y_steepAngle = y_angle;
 			y_isExecuting = false;
 		}
 	}
