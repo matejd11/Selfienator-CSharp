@@ -143,8 +143,6 @@ namespace Arduino.Selfienator.ViewModels
             Thread a = new Thread(() =>
             {
                 var y = new int[] { 60, 90, 120 };
-                var delta = new int[] { 20, -20, 20 };
-                var directions = new int[] { Direction.CLOCK_WISE, Direction.COUNTER_CLOCK_WISE, Direction.CLOCK_WISE };
                 for (int i = 0; i < 3; i++)
                 {
                     var yAngle = y[i];
@@ -153,27 +151,38 @@ namespace Arduino.Selfienator.ViewModels
                     Thread.Sleep(50 * 35);
                     yArrow.startExecuting((int)yAngle, 0, 50);
 
-                    var deltaangle = delta[i];
-                    var directionx = directions[i];
+                    var deltaangle = 30;
 
 
                     double anglee = 0;
                     var commands = new Commands(); ;
                     while (true)
                     {
-                        anglee += deltaangle;
+                        if (i == 0 || i == 2)
+                            anglee += deltaangle;
+                        else if (i == 1)
+                            anglee -= deltaangle;
+
                         anglee %= 360;
                         if (angle < 0)
                         {
                             angle = 360 + angle;
                         }
 
-                        Serial.GetInstance().send(Serial.getCommands().motorX(anglee, directionx, 50));
+                        if (i == 0 || i == 2)
+                        {
+                            Serial.GetInstance().send(Serial.getCommands().motorX(anglee, Direction.CLOCK_WISE, 80));
+                            xArrow.startExecuting((int)anglee, Direction.CLOCK_WISE, 80);
+                        }
+                        else if (i == 1)
+                        {
+                            Serial.GetInstance().send(Serial.getCommands().motorX(anglee, Direction.COUNTER_CLOCK_WISE, 80));
+                            xArrow.startExecuting((int)anglee, Direction.COUNTER_CLOCK_WISE, 80);
+                        }
 
-                        xArrow.startExecuting((int)anglee, directionx, 50);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(80 * deltaangle + 500);
                         Serial.GetInstance().send(Serial.getCommands().focusAndShot());
-                        Thread.Sleep(5000);
+                        Thread.Sleep(1500);
                         if (i == 0 || i == 2)
                         {
                             if (anglee >= angle)
@@ -190,7 +199,7 @@ namespace Arduino.Selfienator.ViewModels
                         }
                     }
                     Serial.GetInstance().send(Serial.getCommands().focusAndShot());
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1500);
                 }
             });
             a.Start();
