@@ -139,7 +139,7 @@ namespace Arduino.Selfienator.ViewModels
 
 
         private void Automat(object obj)
-        {
+        {/*
             Thread a = new Thread(() =>
             {
                 var y = new int[] { 60, 90, 120 };
@@ -202,7 +202,69 @@ namespace Arduino.Selfienator.ViewModels
                     }
                 }
             });
-            a.Start();
+            a.Start(); */
+            
+            Thread b = new Thread(() =>
+            {
+                var yas = new int[] { 60, 90, 120 };
+                double anglee = 0;
+                for (int i = 0; i < 3; i++)
+                {
+
+                    y.angle = yas[i];
+                    Thread.Sleep(50 * 35);
+                    var deltaangle = 30;
+                    sendComm.Execute("Y");
+                    FocusShotComm.Execute("FS");
+                    Thread.Sleep(1500);
+
+                    var commands = new Commands(); ;
+                    while (true)
+                    {
+                        if (i == 0 || i == 2)
+                            anglee += deltaangle;
+                        else if (i == 1)
+                            anglee -= deltaangle;
+
+                        anglee %= 360;
+                        if (anglee < 0)
+                        {
+                            anglee = 360 + anglee;
+                        }
+
+                        x.angle = (int)anglee;
+                        if (i == 0 || i == 2)
+                        {
+                            x.direction = Direction.CLOCK_WISE;
+                        }
+                        else if (i == 1)
+                        {
+                            x.direction = Direction.COUNTER_CLOCK_WISE;
+                        }
+
+                        sendComm.Execute("X");
+
+                        Thread.Sleep(80 * deltaangle + 500);
+                        FocusShotComm.Execute("FS");
+                        Thread.Sleep(1500);
+                        if (i == 0 || i == 2)
+                        {
+                            if (anglee >= angle)
+                            {
+                                break;
+                            }
+                        }
+                        if (i == 1)
+                        {
+                            if (anglee <= 0)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+            b.Start();
         }
 
         private void close(object obj)
