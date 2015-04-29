@@ -34,11 +34,11 @@ int x_deltaTime = 0;
 int x_LastTime = 0;
 int x_stage = 0;
 
-bool y_isExecuting = false;
+bool y_isExecuting = true;
 double y_steepAngle = 1;
-double y_angle = 0;
+double y_angle = 180;
 double y_goalAngle = 90;
-int y_goalDelay = 500;
+int y_goalDelay = 100;
 int y_deltaTime = 0;
 int y_LastTime = 0;
 int y_stage = 0;
@@ -298,6 +298,7 @@ void proces()
 		}
 		if (y_goalAngle == y_angle)
 		{
+			y_steepAngle = y_angle;
 			y_isExecuting = false;
 		}
 	}
