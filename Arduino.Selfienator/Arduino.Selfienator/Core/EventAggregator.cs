@@ -7,7 +7,7 @@ namespace Arduino.Selfienator.Core
 {
     public class EventAggregator : IEventAggregator
     {
-        private static IEventAggregator _ea = null;
+        private static IEventAggregator _ea = new EventAggregator();
         
         #region EA
         private Dictionary<Type, List<WeakReference>> eventSubsribers = new Dictionary<Type, List<WeakReference>>();
@@ -100,7 +100,7 @@ namespace Arduino.Selfienator.Core
         }
 
         #endregion
-
+        /*
         public static IEventAggregator getInstance()
         {
             if (_ea == null)
@@ -109,5 +109,15 @@ namespace Arduino.Selfienator.Core
             }
             return _ea;
         }
+        */
+
+        public static IEventAggregator Instance
+        {
+            get
+            {
+                return _ea;
+            }
+        }
+
     }
 }
