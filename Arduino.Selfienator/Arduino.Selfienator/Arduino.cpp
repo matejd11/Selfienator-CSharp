@@ -120,7 +120,6 @@ void setData(int i, int j){
 		if (array[i][0] == "MY")
 		{
 			y_goalAngle = array[i][1].toFloat();
-			y_goalDirection = array[i][2].toInt();
 			y_goalDelay = array[i][3].toInt();
 			y_isExecuting = true;
 			y_deltaTime = y_goalDelay;
