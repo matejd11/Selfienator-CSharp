@@ -38,8 +38,7 @@ bool y_isExecuting = false;
 double y_steepAngle = 1;
 double y_angle = 0;
 double y_goalAngle = 90;
-int y_goalDelay = 0;
-int y_goalDirection = CLOCK_WISE;
+int y_goalDelay = 100;
 int y_deltaTime = 0;
 int y_LastTime = 0;
 int y_stage = 0;
@@ -273,7 +272,7 @@ void proces()
 		{
 			if (y_deltaTime >= y_goalDelay)
 			{
-				if (y_goalDirection == CLOCK_WISE)
+				if (y_angle > y_goalAngle)
 				{
 					y_angle += y_steepAngle;
 
@@ -283,7 +282,7 @@ void proces()
 					//MOVE
 
 				}
-				else if (y_goalDirection == COUNTER_CLOCK_WISE)
+				else if (y_angle < y_goalAngle)
 				{
 					y_angle -= y_steepAngle;
 
