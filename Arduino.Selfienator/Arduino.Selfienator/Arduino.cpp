@@ -36,7 +36,7 @@ int x_stage = 0;
 
 bool y_isExecuting = true;
 double y_steepAngle = 1;
-double y_angle = 180;
+double y_angle = 0;
 double y_goalAngle = 90;
 int y_goalDelay = 100;
 int y_deltaTime = 0;
