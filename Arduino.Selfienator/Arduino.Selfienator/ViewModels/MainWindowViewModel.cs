@@ -142,23 +142,41 @@ namespace Arduino.Selfienator.ViewModels
         {
             Thread a = new Thread(() =>
             {
-                double anglee = 0;
-                var commands = new Commands();
-                while (true)
+                var y = new int[] { 60, 90, 120 };
+                var delta = new int[] { 20, -20, 20 };
+                var directions = new int[] { 20, -20, 20 };
+                for (int i = 0; i < 3; i++)
                 {
-                    anglee += 20;
-                    anglee %= 360;
+                    var yAngle = y[i];
 
-                    Serial.GetInstance().send(Serial.getCommands().motorX(anglee, direction, 50));
+                    Serial.GetInstance().send(Serial.getCommands().motorY(yAngle, 0, 50));
+                    Thread.Sleep(50*35);
+                    yArrow.startExecuting((int)yAngle, 0, 50);
 
-                    xArrow.startExecuting((int)anglee, direction, 50);
-                    Thread.Sleep(150);
-                    Serial.GetInstance().send(Serial.getCommands().focusAndShot());
-                    Thread.Sleep((int)delay);
-                    if (anglee >= angle)
+                    var deltaangle = delta[i];
+                    var directionx = directions[i];
+
+
+                    double anglee = 0;
+                    var commands = new Commands();;
+                    while (true)
                     {
-                        while (true) { ;}
+                        anglee += deltaangle;
+                        anglee %= 360;
+
+                        Serial.GetInstance().send(Serial.getCommands().motorX(anglee, directionx, 50));
+
+                        xArrow.startExecuting((int)anglee, directionx, 50);
+                        Thread.Sleep(200);
+                        Serial.GetInstance().send(Serial.getCommands().focusAndShot());
+                        Thread.Sleep(1000);
+                        if (anglee >= angle)
+                        {
+                            break;
+                        }
                     }
+                    Serial.GetInstance().send(Serial.getCommands().focusAndShot());
+                    Thread.Sleep(200);
                 }
             });
             a.Start();
