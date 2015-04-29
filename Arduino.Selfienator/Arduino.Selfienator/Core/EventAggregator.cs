@@ -101,7 +101,7 @@ namespace Arduino.Selfienator.Core
 
         #endregion
         /*
-        public static IEventAggregator getInstance()
+        public static IEventAggregator Instance
         {
             if (_ea == null)
             {

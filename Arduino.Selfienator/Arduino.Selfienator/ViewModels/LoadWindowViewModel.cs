@@ -61,8 +61,8 @@ namespace Arduino.Selfienator.ViewModels
 
             if (Serial.Instance != null)
             {
-                EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
-                WindowFactory<MainWindow>.getInstance().CreateNewWindow();
+                EventAggregator.Instance.PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
+                WindowFactory<MainWindow>.Instance.CreateNewWindow();
             }
 
 

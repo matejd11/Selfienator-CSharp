@@ -30,7 +30,7 @@ namespace Arduino.Selfienator.Views
 
         public DebugViewModel(int windowsHashCode)
         {
-            EventAggregator.getInstance().Subsribe(this);
+            EventAggregator.Instance.Subsribe(this);
             _windowHashCode = windowsHashCode;
         }
 

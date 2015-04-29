@@ -15,7 +15,7 @@ namespace Arduino.Selfienator.Views
         public DebugWindow()
         {
             InitializeComponent();
-            EventAggregator.getInstance().Subsribe(this);
+            EventAggregator.Instance.Subsribe(this);
             this.DataContext = new DebugViewModel(this.GetHashCode());
         }
 
@@ -52,7 +52,7 @@ namespace Arduino.Selfienator.Views
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            EventAggregator.getInstance().PublishEvent<ECancelDebug>(new ECancelDebug());
+            EventAggregator.Instance.PublishEvent<ECancelDebug>(new ECancelDebug());
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Arduino.Selfienator.ViewModels
 
         public MainWindowViewModel(int hashCode)
         {
-            EventAggregator.getInstance().Subsribe(this);
+            EventAggregator.Instance.Subsribe(this);
             x = new CommandPropertyHelper();
             y = new CommandPropertyHelper();
             xArrow = new ArrowUserControlVM();
@@ -269,7 +269,7 @@ namespace Arduino.Selfienator.ViewModels
 
         private void close(object obj)
         {
-            EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
+            EventAggregator.Instance.PublishEvent<ECloseWindow>(new ECloseWindow() { hashCode = _windowHashCode });
         }
 
         private void FocusShot(object obj)
@@ -315,13 +315,13 @@ namespace Arduino.Selfienator.ViewModels
         {
             if (_debugOpend)
             {
-                WindowFactory<DebugWindow>.getInstance().CreateNewWindow();
+                WindowFactory<DebugWindow>.Instance.CreateNewWindow();
             }
             else
             {
-                //EventAggregator.getInstance().PublishEvent<ESetFocus>(new ESetFocus() { targetWindow = "DebugWindow" }); 
+                //EventAggregator.Instance.PublishEvent<ESetFocus>(new ESetFocus() { targetWindow = "DebugWindow" }); 
                 //debugOpend = true;
-                EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { targetWindow = "DebugWindow" });
+                EventAggregator.Instance.PublishEvent<ECloseWindow>(new ECloseWindow() { targetWindow = "DebugWindow" });
             }
         }
 

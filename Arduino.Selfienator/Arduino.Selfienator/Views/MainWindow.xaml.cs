@@ -13,7 +13,7 @@ namespace Arduino.Selfienator
         public MainWindow()
         {
             InitializeComponent();
-            EventAggregator.getInstance().Subsribe(this);
+            EventAggregator.Instance.Subsribe(this);
             this.DataContext = new MainWindowViewModel(this.GetHashCode());
         }
 
@@ -27,7 +27,7 @@ namespace Arduino.Selfienator
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            EventAggregator.getInstance().PublishEvent<ECloseWindow>(new ECloseWindow() { targetWindow = "DebugWindow" });
+            EventAggregator.Instance.PublishEvent<ECloseWindow>(new ECloseWindow() { targetWindow = "DebugWindow" });
         }
     }
 }

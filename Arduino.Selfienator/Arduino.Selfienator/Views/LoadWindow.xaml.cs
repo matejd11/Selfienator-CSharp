@@ -13,7 +13,7 @@ namespace Arduino.Selfienator.Views
         public LoadWindow()
         {
             InitializeComponent();
-            EventAggregator.getInstance().Subsribe(this);
+            EventAggregator.Instance.Subsribe(this);
             this.DataContext = new LoadWindowViewModel(this.GetHashCode());
         }
 

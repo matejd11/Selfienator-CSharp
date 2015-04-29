@@ -11,7 +11,7 @@ namespace Arduino.Selfienator.Models
         private static ICommands _commands = new Commands();
         private string inData;
 
-        /*public static Serial GetInstance()
+        /*public static Serial Instance
         {
             if (_instance != null || _commands != null)
             {
@@ -54,7 +54,7 @@ namespace Arduino.Selfienator.Models
                 if (index != -1)
                 {
                     inData = inData.Substring(0, index);
-                    EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData });
+                    EventAggregator.Instance.PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = true, message = inData });
                     inData = tmp;
                 }
                 inData = inData.TrimStart();
@@ -64,7 +64,7 @@ namespace Arduino.Selfienator.Models
         public void send(string message)
         {
             serial.Write(message);
-            EventAggregator.getInstance().PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = false, message = message });
+            EventAggregator.Instance.PublishEvent<EDebugMessage>(new EDebugMessage() { isIncoming = false, message = message });
         }
 
         public void Dispose()
