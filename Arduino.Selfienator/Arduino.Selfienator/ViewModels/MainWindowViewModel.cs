@@ -154,6 +154,8 @@ namespace Arduino.Selfienator.ViewModels
 
                     var deltaangle = 30;
 
+                    Serial.Instance.send(Serial.Commands.focusAndShot());
+                    Thread.Sleep(1500);
 
                     var commands = new Commands(); ;
                     while (true)
@@ -198,8 +200,6 @@ namespace Arduino.Selfienator.ViewModels
                             }
                         }
                     }
-                    Serial.Instance.send(Serial.Commands.focusAndShot());
-                    Thread.Sleep(1500);
                 }
             });
             a.Start();

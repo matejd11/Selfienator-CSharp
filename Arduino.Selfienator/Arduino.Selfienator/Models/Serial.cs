@@ -8,7 +8,7 @@ namespace Arduino.Selfienator.Models
     public class Serial : IDisposable
     {
         private static Serial _instance = new Serial("COM6", 9600);
-        private static ICommands _commands;
+        private static ICommands _commands = new Commands();
         private string inData;
 
         /*public static Serial GetInstance()
