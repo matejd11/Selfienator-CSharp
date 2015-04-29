@@ -144,13 +144,13 @@ namespace Arduino.Selfienator.ViewModels
             {
                 var y = new int[] { 60, 90, 120 };
                 var delta = new int[] { 20, -20, 20 };
-                var directions = new int[] { 20, -20, 20 };
+                var directions = new int[] { 0, 1, 0 };
                 for (int i = 0; i < 3; i++)
                 {
                     var yAngle = y[i];
 
                     Serial.GetInstance().send(Serial.getCommands().motorY(yAngle, 0, 50));
-                    Thread.Sleep(50*35);
+                    Thread.Sleep(50 * 35);
                     yArrow.startExecuting((int)yAngle, 0, 50);
 
                     var deltaangle = delta[i];
@@ -158,7 +158,7 @@ namespace Arduino.Selfienator.ViewModels
 
 
                     double anglee = 0;
-                    var commands = new Commands();;
+                    var commands = new Commands(); ;
                     while (true)
                     {
                         anglee += deltaangle;
@@ -170,9 +170,19 @@ namespace Arduino.Selfienator.ViewModels
                         Thread.Sleep(200);
                         Serial.GetInstance().send(Serial.getCommands().focusAndShot());
                         Thread.Sleep(1000);
-                        if (anglee >= angle)
+                        if (i == 0 || i == 2)
                         {
-                            break;
+                            if (anglee >= angle)
+                            {
+                                break;
+                            }
+                        }
+                        if (i == 1)
+                        {
+                            if (anglee <= 0)
+                            {
+                                break;
+                            }
                         }
                     }
                     Serial.GetInstance().send(Serial.getCommands().focusAndShot());
