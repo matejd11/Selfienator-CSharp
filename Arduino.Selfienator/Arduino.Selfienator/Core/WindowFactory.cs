@@ -21,7 +21,7 @@ namespace Arduino.Selfienator.Core
             return window.GetHashCode(); 
         }
 
-        public static WindowFactory<T> Instance
+        public static WindowFactory<T> getInstance()
         {
             if (_instance == null)
             {
@@ -32,7 +32,7 @@ namespace Arduino.Selfienator.Core
 
         public void OnEventHandler(EOpenWindow<T> e)
         {
-            WindowFactory<T>.Instance.CreateNewWindow();
+            WindowFactory<T>.getInstance().CreateNewWindow();
         }
     }
 }

@@ -315,7 +315,7 @@ namespace Arduino.Selfienator.ViewModels
         {
             if (_debugOpend)
             {
-                WindowFactory<DebugWindow>.Instance.CreateNewWindow();
+                WindowFactory<DebugWindow>.getInstance().CreateNewWindow();
             }
             else
             {
